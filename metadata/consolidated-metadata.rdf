@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY metadata "https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#" >
+]>
+
+
+<rdf:RDF xmlns="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#"
+     xml:base="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:metadata="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata">
+        <dateCreated xml:lang="en">14 April 2014</dateCreated>
+        <prefLabel xml:lang="en">Consolidated Metadata Ontology</prefLabel>
+        <coverage xml:lang="en">Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS.</coverage>
+        <license xml:lang="en">The MIT License (MIT)
+
+Copyright (c) 2014 Nine Points Solutions, LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</license>
+        <description xml:lang="en">This ontology is a consolidation of basic concepts from the Dublin Core Element vocabulary and the SKOS data model.  The sources for all the properties are provided as &quot;metadata&quot; (reusing the basic concepts defined here).  Metadata (when it is not a simple string literal) is defined as both an annotation property and a data or object property.  An example of this is dateCreated.  It is defined as both an annotation property and a data property of type dateTime.  Since the same URI cannot be used for both, the latter is named propDateCreated.  This convention (adding the prefix &quot;prop&quot;) will be used consistently in this ontology.</description>
+        <mimeType>application/rdf+xml</mimeType>
+        <scopeNote xml:lang="en">It is important to note that not all concepts are duplicated from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
+
+Where the concepts overlap in Dublin Core and SKOS, only one property is chosen.  But the mappingRelation property indicates the correspondence.  An example of this is the correspondence between Dublin Core&apos;s title and SKOS&apos; prefLabel.
+
+What follows is a list of the Dublin Core Elements vocabulary and SKOS model concepts that are not included in this ontology (and why):
+
+ - DC:format (file and mime formats) - Can be achieved using the mimeType property. 
+ - DC:identifier (unambiguous reference) - The URI of an entity provides this reference.
+ - DC:type (DCMI Type) - DCMI types include software, images, etc. and MIME types.  Instead of the general DCMI type,
+       a mimeType property is defined.
+ - SKOS:Concept (unit of thought) - A class definition with its metadata defines a Concept.
+ - SKOS:ConceptScheme and inScheme (collection of concepts) - An ontology (and its namespace) collects related concepts.
+ - SKOS:Collection, OrderedCollection, member, memberList - 
+       Will be defined in a separate ontology dealing specifically with the Collection semantic.
+ - SKOS:hasTopConcept and topConceptOf (defines the top Concept in a ConceptScheme) - 
+       Can be achieved by subclassing from owl:Top for an ontology.
+ - SKOS:semanticRelation, broader, narrower, related, broaderTransitive, narrowerTransitive - 
+       Can be achieved using subclassing.
+ - SKOS:relatedMatch - Can be achieved by using the mappingRelation property (and not the more specific sub-properties).
+
+</scopeNote>
+        <language>en-US</language>
+        <contributor>Andrea Westerinen
+Nine Points Solutions, LLC</contributor>
+        <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
+        <keyword xml:lang="en">metadata</keyword>
+        <owl:versionIRI rdf:resource="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata/1.0.0"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#altLabel -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;altLabel">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#broadMatch -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;broadMatch">
+        <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#changeNote -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;changeNote">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;closeMatch">
+        <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#contributor -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;contributor"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;copyright">
+        <metadata:example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</metadata:example>
+        <metadata:definition xml:lang="en">The copyright statement for an ontology/resource.  Per WordNet, copyright is &quot;the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.&quot;</metadata:definition>
+        <metadata:prefLabel xml:lang="en">copyright</metadata:prefLabel>
+        <rdfs:subPropertyOf rdf:resource="&metadata;rights"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#coverage -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;coverage"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#creator -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;creator"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#date -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;date"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateCreated -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;dateCreated">
+        <rdfs:subPropertyOf rdf:resource="&metadata;date"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateModified -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;dateModified">
+        <rdfs:subPropertyOf rdf:resource="&metadata;date"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;definition">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#description -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;description">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#editorialNote -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;editorialNote">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;exactMatch">
+        <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;example">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#hiddenLabel -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;hiddenLabel">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#historyNote -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;historyNote">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#inspiredBy -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;inspiredBy">
+        <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#keyword -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;keyword"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;language">
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.ietf.org/rfc/rfc4646.txt</rdfs:isDefinedBy>
+        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+http://dublincore.org/documents/dces/
+
+Term: language</metadata:source>
+        <metadata:scopeNote xml:lang="en">Language values must follow the syntax defined in IETF RFC 4646.</metadata:scopeNote>
+        <rdfs:comment xml:lang="en">Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646.</rdfs:comment>
+        <rdfs:comment xml:lang="en">When applied to an ontology, it defines the primary language used to define the types and properties.  Note that some types and properties may be defined using another language, and will carry their own language property.</rdfs:comment>
+        <metadata:exactMatch>http://purl.org/dc/elements/1.1/language</metadata:exactMatch>
+        <metadata:source xml:lang="en">Tags for Identifying Languages, IETF RFC 4646
+http://www.ietf.org/rfc/rfc4646.txt
+
+Defines the format of the language string.</metadata:source>
+        <metadata:example>en-US</metadata:example>
+        <metadata:definition xml:lang="en">The language of the entity/resource.</metadata:definition>
+        <metadata:prefLabel xml:lang="en">language</metadata:prefLabel>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;license">
+        <metadata:source xml:lang="en">DCMI Metadata Terms
+http://dublincore.org/documents/dcmi-terms/#terms-license
+
+Term: license</metadata:source>
+        <metadata:example xml:lang="en">Multiple types of open-source licenses can be browsed at http://opensource.org/licenses.</metadata:example>
+        <metadata:definition xml:lang="en">The licensing applied to the ontology/resource.  A license is a legal document giving official permission to do something with the ontology/resource.</metadata:definition>
+        <metadata:scopeNote xml:lang="en">The specific wording of the license should be provided as the value of this property.  
+
+At a minimum, a reference to a &quot;standard&quot; license should be provided.</metadata:scopeNote>
+        <metadata:exactMatch>http://purl.org/dc/terms/license</metadata:exactMatch>
+        <metadata:prefLabel xml:lang="en">license</metadata:prefLabel>
+        <rdfs:subPropertyOf rdf:resource="&metadata;rights"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;mappingRelation">
+        <rdfs:subPropertyOf rdf:resource="&metadata;relation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;mimeType">
+        <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.iana.org/assignments/media-types/media-types.xhtml</rdfs:isDefinedBy>
+        <metadata:closeMatch>http://purl.org/dc/elements/1.1/type</metadata:closeMatch>
+        <metadata:example>text/owl-functional</metadata:example>
+        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+http://dublincore.org/documents/dces/
+
+Terms: format and type</metadata:source>
+        <metadata:prefLabel xml:lang="en">MIME type</metadata:prefLabel>
+        <metadata:scopeNote xml:lang="en">Possible values of MIME type for OWL ontologies are:
+
+ - text/owl-functional (extension .ofn)
+ - text/owl-manchester (extension .omn)
+ - application/owl+xml (extension .owx)
+ - application/rdf+xml (extension .rdf)
+ - text/turtle (extension .ttl)</metadata:scopeNote>
+        <metadata:closeMatch>http://purl.org/dc/elements/1.1/format</metadata:closeMatch>
+        <metadata:source xml:lang="en">IANA Media Types
+http://www.iana.org/assignments/media-types/media-types.xhtml
+
+Registries: application and text</metadata:source>
+        <metadata:definition xml:lang="en">The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
+</metadata:definition>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#narrowMatch -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;narrowMatch">
+        <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#notation -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;notation">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;note"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;prefLabel">
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#publisher -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;publisher"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#relation -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;relation"/>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#replaces -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;replaces">
+        <rdfs:subPropertyOf rdf:resource="&metadata;relation"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;rights">
+        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+http://dublincore.org/documents/dces/
+
+Term: rights</metadata:source>
+        <metadata:exactMatch>http://purl.org/dc/elements/1.1/rights</metadata:exactMatch>
+        <metadata:definition xml:lang="en">Information about the rights/entitlements held in and over the ontology/resource.</metadata:definition>
+        <metadata:scopeNote xml:lang="en">It is assumed that the rights property (and its sub-properties) only apply at the ontology level.</metadata:scopeNote>
+        <rdfs:comment xml:lang="en">Typically, rights information includes a statement about various property rights associated with the ontology/resource, including intellectual property rights.</rdfs:comment>
+        <metadata:prefLabel xml:lang="en">rights</metadata:prefLabel>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;scopeNote">
+        <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source -->
+
+    <owl:AnnotationProperty rdf:about="&metadata;source">
+        <metadata:example xml:lang="en">Dublin Core Metadata Element Set, V1.1
+http://dublincore.org/documents/dces/
+
+Term: source</metadata:example>
+        <metadata:exactMatch>http://purl.org/dc/elements/1.1/source</metadata:exactMatch>
+        <metadata:definition xml:lang="en">A related resource from which the defined entity/resource is derived.</metadata:definition>
+        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+http://dublincore.org/documents/dces/
+
+Term: source</metadata:source>
+        <metadata:scopeNote xml:lang="en">Ideally, both a title and a URI or other identification schema for the resource are provided.  An example of another identification scheme is an ISBN reference for a publication.
+
+If further information can be provided to pinpoint the exact source of the information, that too should be noted.</metadata:scopeNote>
+        <rdfs:comment xml:lang="en">The described entity may be derived from the related resource in whole or in part.  Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.</rdfs:comment>
+        <metadata:prefLabel xml:lang="en">source of definition and/or values</metadata:prefLabel>
+    </owl:AnnotationProperty>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
