@@ -6,18 +6,18 @@
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY metadata "https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#" >
+    <!ENTITY metadata "https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#" >
 ]>
 
 
-<rdf:RDF xmlns="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#"
-     xml:base="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata"
+<rdf:RDF xmlns="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#"
+     xml:base="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:metadata="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#"
+     xmlns:metadata="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <owl:Ontology rdf:about="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata">
+    <owl:Ontology rdf:about="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata">
         <dateCreated xml:lang="en">14 April 2014</dateCreated>
         <prefLabel xml:lang="en">Consolidated Metadata Ontology</prefLabel>
         <coverage xml:lang="en">Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS.</coverage>
@@ -70,7 +70,7 @@ What follows is a list of the Dublin Core Elements vocabulary and SKOS model con
 Nine Points Solutions, LLC</contributor>
         <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
         <keyword xml:lang="en">metadata</keyword>
-        <owl:versionIRI rdf:resource="https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata/1.0.0"/>
+        <owl:versionIRI rdf:resource="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata/1.0.0"/>
     </owl:Ontology>
     
 
@@ -86,7 +86,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#altLabel -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#altLabel -->
 
     <owl:AnnotationProperty rdf:about="&metadata;altLabel">
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
@@ -94,7 +94,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#broadMatch -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#broadMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata;broadMatch">
         <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
@@ -102,7 +102,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#changeNote -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#changeNote -->
 
     <owl:AnnotationProperty rdf:about="&metadata;changeNote">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -110,7 +110,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#closeMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata;closeMatch">
         <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
@@ -118,13 +118,13 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#contributor -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#contributor -->
 
     <owl:AnnotationProperty rdf:about="&metadata;contributor"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright -->
 
     <owl:AnnotationProperty rdf:about="&metadata;copyright">
         <metadata:example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</metadata:example>
@@ -135,25 +135,25 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#coverage -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#coverage -->
 
     <owl:AnnotationProperty rdf:about="&metadata;coverage"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#creator -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#creator -->
 
     <owl:AnnotationProperty rdf:about="&metadata;creator"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#date -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#date -->
 
     <owl:AnnotationProperty rdf:about="&metadata;date"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateCreated -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateCreated -->
 
     <owl:AnnotationProperty rdf:about="&metadata;dateCreated">
         <rdfs:subPropertyOf rdf:resource="&metadata;date"/>
@@ -161,7 +161,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateModified -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateModified -->
 
     <owl:AnnotationProperty rdf:about="&metadata;dateModified">
         <rdfs:subPropertyOf rdf:resource="&metadata;date"/>
@@ -169,7 +169,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition -->
 
     <owl:AnnotationProperty rdf:about="&metadata;definition">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -177,7 +177,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#description -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#description -->
 
     <owl:AnnotationProperty rdf:about="&metadata;description">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -185,7 +185,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#editorialNote -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#editorialNote -->
 
     <owl:AnnotationProperty rdf:about="&metadata;editorialNote">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -193,7 +193,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata;exactMatch">
         <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
@@ -201,7 +201,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example -->
 
     <owl:AnnotationProperty rdf:about="&metadata;example">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -209,7 +209,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#hiddenLabel -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#hiddenLabel -->
 
     <owl:AnnotationProperty rdf:about="&metadata;hiddenLabel">
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
@@ -217,7 +217,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#historyNote -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#historyNote -->
 
     <owl:AnnotationProperty rdf:about="&metadata;historyNote">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -225,7 +225,7 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#inspiredBy -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#inspiredBy -->
 
     <owl:AnnotationProperty rdf:about="&metadata;inspiredBy">
         <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
@@ -233,13 +233,13 @@ Nine Points Solutions, LLC</contributor>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#keyword -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#keyword -->
 
     <owl:AnnotationProperty rdf:about="&metadata;keyword"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language -->
 
     <owl:AnnotationProperty rdf:about="&metadata;language">
         <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.ietf.org/rfc/rfc4646.txt</rdfs:isDefinedBy>
@@ -262,7 +262,7 @@ Defines the format of the language string.</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license -->
 
     <owl:AnnotationProperty rdf:about="&metadata;license">
         <metadata:source xml:lang="en">DCMI Metadata Terms
@@ -281,7 +281,7 @@ At a minimum, a reference to a &quot;standard&quot; license should be provided.<
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation -->
 
     <owl:AnnotationProperty rdf:about="&metadata;mappingRelation">
         <rdfs:subPropertyOf rdf:resource="&metadata;relation"/>
@@ -289,7 +289,7 @@ At a minimum, a reference to a &quot;standard&quot; license should be provided.<
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType -->
 
     <owl:AnnotationProperty rdf:about="&metadata;mimeType">
         <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.iana.org/assignments/media-types/media-types.xhtml</rdfs:isDefinedBy>
@@ -318,7 +318,7 @@ Registries: application and text</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#narrowMatch -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#narrowMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata;narrowMatch">
         <rdfs:subPropertyOf rdf:resource="&metadata;mappingRelation"/>
@@ -326,7 +326,7 @@ Registries: application and text</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#notation -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#notation -->
 
     <owl:AnnotationProperty rdf:about="&metadata;notation">
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
@@ -334,13 +334,13 @@ Registries: application and text</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note -->
 
     <owl:AnnotationProperty rdf:about="&metadata;note"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel -->
 
     <owl:AnnotationProperty rdf:about="&metadata;prefLabel">
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
@@ -348,19 +348,19 @@ Registries: application and text</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#publisher -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#publisher -->
 
     <owl:AnnotationProperty rdf:about="&metadata;publisher"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#relation -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#relation -->
 
     <owl:AnnotationProperty rdf:about="&metadata;relation"/>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#replaces -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#replaces -->
 
     <owl:AnnotationProperty rdf:about="&metadata;replaces">
         <rdfs:subPropertyOf rdf:resource="&metadata;relation"/>
@@ -368,7 +368,7 @@ Registries: application and text</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights -->
 
     <owl:AnnotationProperty rdf:about="&metadata;rights">
         <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
@@ -384,7 +384,7 @@ Term: rights</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote -->
 
     <owl:AnnotationProperty rdf:about="&metadata;scopeNote">
         <rdfs:subPropertyOf rdf:resource="&metadata;note"/>
@@ -392,7 +392,7 @@ Term: rights</metadata:source>
     
 
 
-    <!-- https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source -->
+    <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source -->
 
     <owl:AnnotationProperty rdf:about="&metadata;source">
         <metadata:example xml:lang="en">Dublin Core Metadata Element Set, V1.1

@@ -5,13 +5,13 @@ Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
 Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
-Ontology(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata>
-<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata/1.0.0>
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "en-US")
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "text/owl-functional")
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateCreated> "14 April 2014"@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#coverage> "Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS."@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> "It is important to note that not all concepts are duplicated from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
+Ontology(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata>
+<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata/1.0.0>
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "en-US")
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "text/owl-functional")
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateCreated> "14 April 2014"@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#coverage> "Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS."@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> "It is important to note that not all concepts are duplicated from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
 Where the concepts overlap in Dublin Core and SKOS, only one property is chosen.  But the mappingRelation property indicates the correspondence.  An example of this is the correspondence between Dublin Core's title and SKOS' prefLabel.
 
@@ -32,8 +32,8 @@ What follows is a list of the Dublin Core Elements vocabulary and SKOS model con
  - SKOS:relatedMatch - Can be achieved by using the mappingRelation property (and not the more specific sub-properties).
 
 "@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#description> "This ontology is a consolidation of basic concepts from the Dublin Core Element vocabulary and the SKOS data model.  The sources for all the properties are provided as \"metadata\" (reusing the basic concepts defined here).  Metadata (when it is not a simple string literal) is defined as both an annotation property and a data or object property.  An example of this is dateCreated.  It is defined as both an annotation property and a data property of type dateTime.  Since the same URI cannot be used for both, the latter is named propDateCreated.  This convention (adding the prefix \"prop\") will be used consistently in this ontology."@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "The MIT License (MIT)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#description> "This ontology is a consolidation of basic concepts from the Dublin Core Element vocabulary and the SKOS data model.  The sources for all the properties are provided as \"metadata\" (reusing the basic concepts defined here).  Metadata (when it is not a simple string literal) is defined as both an annotation property and a data or object property.  An example of this is dateCreated.  It is defined as both an annotation property and a data property of type dateTime.  Since the same URI cannot be used for both, the latter is named propDateCreated.  This convention (adding the prefix \"prop\") will be used consistently in this ontology."@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "The MIT License (MIT)
 
 Copyright (c) 2014 Nine Points Solutions, LLC
 
@@ -54,142 +54,142 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE."@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright> "Copyright (c) 2014 Nine Points Solutions, LLC"@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#keyword> "metadata"@en)
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#contributor> "Andrea Westerinen
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright> "Copyright (c) 2014 Nine Points Solutions, LLC"@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#keyword> "metadata"@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#contributor> "Andrea Westerinen
 Nine Points Solutions, LLC")
-Annotation(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> "Consolidated Metadata Ontology"@en)
+Annotation(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> "Consolidated Metadata Ontology"@en)
 
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#altLabel>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#altLabel> rdfs:label)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#broadMatch>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#broadMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#changeNote>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#changeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#contributor>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright>))
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright> "The copyright statement for an ontology/resource.  Per WordNet, copyright is \"the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.\""@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright> "Copyright (c) 2014, Nine Points Solutions, LLC"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright> "copyright"@en)
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#copyright> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#coverage>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#creator>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#date>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateCreated>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateCreated> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#date>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateModified>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#dateModified> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#date>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#description>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#description> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#editorialNote>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#editorialNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#hiddenLabel>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#hiddenLabel> rdfs:label)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#historyNote>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#historyNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#inspiredBy>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#inspiredBy> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#keyword>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language>))
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "Language values must follow the syntax defined in IETF RFC 4646."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "http://purl.org/dc/elements/1.1/language")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "language"@en)
-AnnotationAssertion(rdfs:isDefinedBy <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "http://www.ietf.org/rfc/rfc4646.txt"^^xsd:anyURI)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "The language of the entity/resource."@en)
-AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646."@en)
-AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "When applied to an ontology, it defines the primary language used to define the types and properties.  Note that some types and properties may be defined using another language, and will carry their own language property."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "en-US")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "Tags for Identifying Languages, IETF RFC 4646
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#altLabel>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#altLabel> rdfs:label)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#broadMatch>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#broadMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#changeNote>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#changeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#closeMatch>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#contributor>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright>))
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright> "The copyright statement for an ontology/resource.  Per WordNet, copyright is \"the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.\""@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright> "Copyright (c) 2014, Nine Points Solutions, LLC"@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright> "copyright"@en)
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#coverage>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#creator>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#date>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateCreated>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateCreated> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#date>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateModified>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#dateModified> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#date>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#description>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#description> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#editorialNote>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#editorialNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#hiddenLabel>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#hiddenLabel> rdfs:label)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#historyNote>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#historyNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#inspiredBy>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#inspiredBy> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#keyword>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language>))
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "Language values must follow the syntax defined in IETF RFC 4646."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "http://purl.org/dc/elements/1.1/language")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "language"@en)
+AnnotationAssertion(rdfs:isDefinedBy <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "http://www.ietf.org/rfc/rfc4646.txt"^^xsd:anyURI)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "The language of the entity/resource."@en)
+AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646."@en)
+AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "When applied to an ontology, it defines the primary language used to define the types and properties.  Note that some types and properties may be defined using another language, and will carry their own language property."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "en-US")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "Tags for Identifying Languages, IETF RFC 4646
 http://www.ietf.org/rfc/rfc4646.txt
 
 Defines the format of the language string."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#language> "Dublin Core Metadata Element Set, V1.1
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#language> "Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
 Term: language"@en)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license>))
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "DCMI Metadata Terms
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license>))
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "DCMI Metadata Terms
 http://dublincore.org/documents/dcmi-terms/#terms-license
 
 Term: license"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "http://purl.org/dc/terms/license")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "The specific wording of the license should be provided as the value of this property.  
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "http://purl.org/dc/terms/license")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "The specific wording of the license should be provided as the value of this property.  
 
 At a minimum, a reference to a \"standard\" license should be provided."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "Multiple types of open-source licenses can be browsed at http://opensource.org/licenses."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "license"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> "The licensing applied to the ontology/resource.  A license is a legal document giving official permission to do something with the ontology/resource."@en)
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#license> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#relation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType>))
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "text/owl-functional")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "http://purl.org/dc/elements/1.1/type")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "MIME type"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "Possible values of MIME type for OWL ontologies are:
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "Multiple types of open-source licenses can be browsed at http://opensource.org/licenses."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "license"@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> "The licensing applied to the ontology/resource.  A license is a legal document giving official permission to do something with the ontology/resource."@en)
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#relation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType>))
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "text/owl-functional")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "http://purl.org/dc/elements/1.1/type")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "MIME type"@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "Possible values of MIME type for OWL ontologies are:
 
  - text/owl-functional (extension .ofn)
  - text/owl-manchester (extension .omn)
  - application/owl+xml (extension .owx)
  - application/rdf+xml (extension .rdf)
  - text/turtle (extension .ttl)"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
 "@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "IANA Media Types
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "IANA Media Types
 http://www.iana.org/assignments/media-types/media-types.xhtml
 
 Registries: application and text"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "Dublin Core Metadata Element Set, V1.1
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
 Terms: format and type"@en)
-AnnotationAssertion(rdfs:isDefinedBy <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "http://www.iana.org/assignments/media-types/media-types.xhtml"^^xsd:anyURI)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mimeType> "http://purl.org/dc/elements/1.1/format")
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#narrowMatch>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#narrowMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#mappingRelation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#notation>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#notation> rdfs:label)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> rdfs:label)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#publisher>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#relation>))
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#replaces>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#replaces> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#relation>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights>))
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "Dublin Core Metadata Element Set, V1.1
+AnnotationAssertion(rdfs:isDefinedBy <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "http://www.iana.org/assignments/media-types/media-types.xhtml"^^xsd:anyURI)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#closeMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mimeType> "http://purl.org/dc/elements/1.1/format")
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#narrowMatch>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#narrowMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#mappingRelation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#notation>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#notation> rdfs:label)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> rdfs:label)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#publisher>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#relation>))
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#replaces>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#replaces> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#relation>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights>))
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
 Term: rights"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "Information about the rights/entitlements held in and over the ontology/resource."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "http://purl.org/dc/elements/1.1/rights")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "rights"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "It is assumed that the rights property (and its sub-properties) only apply at the ontology level."@en)
-AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#rights> "Typically, rights information includes a statement about various property rights associated with the ontology/resource, including intellectual property rights."@en)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote>))
-SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#note>)
-Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source>))
-AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "The described entity may be derived from the related resource in whole or in part.  Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "source of definition and/or values"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "http://purl.org/dc/elements/1.1/source")
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "Ideally, both a title and a URI or other identification schema for the resource are provided.  An example of another identification scheme is an ISBN reference for a publication.
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "Information about the rights/entitlements held in and over the ontology/resource."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "http://purl.org/dc/elements/1.1/rights")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "rights"@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "It is assumed that the rights property (and its sub-properties) only apply at the ontology level."@en)
+AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights> "Typically, rights information includes a statement about various property rights associated with the ontology/resource, including intellectual property rights."@en)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote>))
+SubAnnotationPropertyOf(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#note>)
+Declaration(AnnotationProperty(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source>))
+AnnotationAssertion(rdfs:comment <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "The described entity may be derived from the related resource in whole or in part.  Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#prefLabel> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "source of definition and/or values"@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#exactMatch> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "http://purl.org/dc/elements/1.1/source")
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#scopeNote> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "Ideally, both a title and a URI or other identification schema for the resource are provided.  An example of another identification scheme is an ISBN reference for a publication.
 
 If further information can be provided to pinpoint the exact source of the information, that too should be noted."@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "Dublin Core Metadata Element Set, V1.1
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#example> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
 Term: source"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "Dublin Core Metadata Element Set, V1.1
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
 Term: source"@en)
-AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/blob/master/metadata/consolidated-metadata#source> "A related resource from which the defined entity/resource is derived."@en)
+AnnotationAssertion(<https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#definition> <https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source> "A related resource from which the defined entity/resource is derived."@en)
 )
