@@ -13,14 +13,17 @@
 <rdf:RDF xmlns="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#"
      xml:base="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:metadata="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:metadata="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#">
     <owl:Ontology rdf:about="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata">
+        <changeNote xml:lang="en">14 Apr 2014
+Updated the ontology IRI to simplify it</changeNote>
         <dateCreated xml:lang="en">14 April 2014</dateCreated>
+        <contributor>Andrea Westerinen
+Nine Points Solutions, LLC</contributor>
         <prefLabel xml:lang="en">Consolidated Metadata Ontology</prefLabel>
-        <coverage xml:lang="en">Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS.</coverage>
         <license xml:lang="en">The MIT License (MIT)
 
 Copyright (c) 2014 Nine Points Solutions, LLC
@@ -42,8 +45,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</license>
+        <language>en-US</language>
         <description xml:lang="en">This ontology is a consolidation of basic concepts from the Dublin Core Element vocabulary and the SKOS data model.  The sources for all the properties are provided as &quot;metadata&quot; (reusing the basic concepts defined here).  Metadata (when it is not a simple string literal) is defined as both an annotation property and a data or object property.  An example of this is dateCreated.  It is defined as both an annotation property and a data property of type dateTime.  Since the same URI cannot be used for both, the latter is named propDateCreated.  This convention (adding the prefix &quot;prop&quot;) will be used consistently in this ontology.</description>
         <mimeType>application/rdf+xml</mimeType>
+        <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
         <scopeNote xml:lang="en">It is important to note that not all concepts are duplicated from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
 Where the concepts overlap in Dublin Core and SKOS, only one property is chosen.  But the mappingRelation property indicates the correspondence.  An example of this is the correspondence between Dublin Core&apos;s title and SKOS&apos; prefLabel.
@@ -65,12 +70,9 @@ What follows is a list of the Dublin Core Elements vocabulary and SKOS model con
  - SKOS:relatedMatch - Can be achieved by using the mappingRelation property (and not the more specific sub-properties).
 
 </scopeNote>
-        <language>en-US</language>
-        <contributor>Andrea Westerinen
-Nine Points Solutions, LLC</contributor>
-        <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
+        <coverage xml:lang="en">Ontology providing a basic set of metadata annotation and data/object properties based on Dublin Core and SKOS.</coverage>
         <keyword xml:lang="en">metadata</keyword>
-        <owl:versionIRI rdf:resource="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata/1.0.0"/>
+        <owl:versionIRI rdf:resource="https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata/0.0.2"/>
     </owl:Ontology>
     
 
@@ -127,9 +129,9 @@ Nine Points Solutions, LLC</contributor>
     <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#copyright -->
 
     <owl:AnnotationProperty rdf:about="&metadata;copyright">
-        <metadata:example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</metadata:example>
-        <metadata:definition xml:lang="en">The copyright statement for an ontology/resource.  Per WordNet, copyright is &quot;the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.&quot;</metadata:definition>
-        <metadata:prefLabel xml:lang="en">copyright</metadata:prefLabel>
+        <example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</example>
+        <definition xml:lang="en">The copyright statement for an ontology/resource.  Per WordNet, copyright is &quot;the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.&quot;</definition>
+        <prefLabel xml:lang="en">copyright</prefLabel>
         <rdfs:subPropertyOf rdf:resource="&metadata;rights"/>
     </owl:AnnotationProperty>
     
@@ -243,21 +245,21 @@ Nine Points Solutions, LLC</contributor>
 
     <owl:AnnotationProperty rdf:about="&metadata;language">
         <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.ietf.org/rfc/rfc4646.txt</rdfs:isDefinedBy>
-        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+        <source xml:lang="en">Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
-Term: language</metadata:source>
-        <metadata:scopeNote xml:lang="en">Language values must follow the syntax defined in IETF RFC 4646.</metadata:scopeNote>
+Term: language</source>
+        <example>en-US</example>
+        <definition xml:lang="en">The language of the entity/resource.</definition>
+        <exactMatch>http://purl.org/dc/elements/1.1/language</exactMatch>
+        <scopeNote xml:lang="en">Language values must follow the syntax defined in IETF RFC 4646.</scopeNote>
         <rdfs:comment xml:lang="en">Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646.</rdfs:comment>
-        <rdfs:comment xml:lang="en">When applied to an ontology, it defines the primary language used to define the types and properties.  Note that some types and properties may be defined using another language, and will carry their own language property.</rdfs:comment>
-        <metadata:exactMatch>http://purl.org/dc/elements/1.1/language</metadata:exactMatch>
-        <metadata:source xml:lang="en">Tags for Identifying Languages, IETF RFC 4646
+        <source xml:lang="en">Tags for Identifying Languages, IETF RFC 4646
 http://www.ietf.org/rfc/rfc4646.txt
 
-Defines the format of the language string.</metadata:source>
-        <metadata:example>en-US</metadata:example>
-        <metadata:definition xml:lang="en">The language of the entity/resource.</metadata:definition>
-        <metadata:prefLabel xml:lang="en">language</metadata:prefLabel>
+Defines the format of the language string.</source>
+        <rdfs:comment xml:lang="en">When applied to an ontology, it defines the primary language used to define the types and properties.  Note that some types and properties may be defined using another language, and will carry their own language property.</rdfs:comment>
+        <prefLabel xml:lang="en">language</prefLabel>
     </owl:AnnotationProperty>
     
 
@@ -265,17 +267,17 @@ Defines the format of the language string.</metadata:source>
     <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#license -->
 
     <owl:AnnotationProperty rdf:about="&metadata;license">
-        <metadata:source xml:lang="en">DCMI Metadata Terms
+        <source xml:lang="en">DCMI Metadata Terms
 http://dublincore.org/documents/dcmi-terms/#terms-license
 
-Term: license</metadata:source>
-        <metadata:example xml:lang="en">Multiple types of open-source licenses can be browsed at http://opensource.org/licenses.</metadata:example>
-        <metadata:definition xml:lang="en">The licensing applied to the ontology/resource.  A license is a legal document giving official permission to do something with the ontology/resource.</metadata:definition>
-        <metadata:scopeNote xml:lang="en">The specific wording of the license should be provided as the value of this property.  
+Term: license</source>
+        <example xml:lang="en">Multiple types of open-source licenses can be browsed at http://opensource.org/licenses.</example>
+        <scopeNote xml:lang="en">The specific wording of the license should be provided as the value of this property.  
 
-At a minimum, a reference to a &quot;standard&quot; license should be provided.</metadata:scopeNote>
-        <metadata:exactMatch>http://purl.org/dc/terms/license</metadata:exactMatch>
-        <metadata:prefLabel xml:lang="en">license</metadata:prefLabel>
+At a minimum, a reference to a &quot;standard&quot; license should be provided.</scopeNote>
+        <exactMatch>http://purl.org/dc/terms/license</exactMatch>
+        <definition xml:lang="en">The licensing applied to the ontology/resource.  A license is a legal document giving official permission to do something with the ontology/resource.</definition>
+        <prefLabel xml:lang="en">license</prefLabel>
         <rdfs:subPropertyOf rdf:resource="&metadata;rights"/>
     </owl:AnnotationProperty>
     
@@ -293,27 +295,27 @@ At a minimum, a reference to a &quot;standard&quot; license should be provided.<
 
     <owl:AnnotationProperty rdf:about="&metadata;mimeType">
         <rdfs:isDefinedBy rdf:datatype="&xsd;anyURI">http://www.iana.org/assignments/media-types/media-types.xhtml</rdfs:isDefinedBy>
-        <metadata:closeMatch>http://purl.org/dc/elements/1.1/type</metadata:closeMatch>
-        <metadata:example>text/owl-functional</metadata:example>
-        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+        <source xml:lang="en">Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
-Terms: format and type</metadata:source>
-        <metadata:prefLabel xml:lang="en">MIME type</metadata:prefLabel>
-        <metadata:scopeNote xml:lang="en">Possible values of MIME type for OWL ontologies are:
+Terms: format and type</source>
+        <prefLabel xml:lang="en">MIME type</prefLabel>
+        <closeMatch>http://purl.org/dc/elements/1.1/type</closeMatch>
+        <scopeNote xml:lang="en">Possible values of MIME type for OWL ontologies are:
 
  - text/owl-functional (extension .ofn)
  - text/owl-manchester (extension .omn)
  - application/owl+xml (extension .owx)
  - application/rdf+xml (extension .rdf)
- - text/turtle (extension .ttl)</metadata:scopeNote>
-        <metadata:closeMatch>http://purl.org/dc/elements/1.1/format</metadata:closeMatch>
-        <metadata:source xml:lang="en">IANA Media Types
+ - text/turtle (extension .ttl)</scopeNote>
+        <example>text/owl-functional</example>
+        <source xml:lang="en">IANA Media Types
 http://www.iana.org/assignments/media-types/media-types.xhtml
 
-Registries: application and text</metadata:source>
-        <metadata:definition xml:lang="en">The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
-</metadata:definition>
+Registries: application and text</source>
+        <definition xml:lang="en">The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
+</definition>
+        <closeMatch>http://purl.org/dc/elements/1.1/format</closeMatch>
     </owl:AnnotationProperty>
     
 
@@ -371,15 +373,15 @@ Registries: application and text</metadata:source>
     <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#rights -->
 
     <owl:AnnotationProperty rdf:about="&metadata;rights">
-        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+        <exactMatch>http://purl.org/dc/elements/1.1/rights</exactMatch>
+        <source xml:lang="en">Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
-Term: rights</metadata:source>
-        <metadata:exactMatch>http://purl.org/dc/elements/1.1/rights</metadata:exactMatch>
-        <metadata:definition xml:lang="en">Information about the rights/entitlements held in and over the ontology/resource.</metadata:definition>
-        <metadata:scopeNote xml:lang="en">It is assumed that the rights property (and its sub-properties) only apply at the ontology level.</metadata:scopeNote>
+Term: rights</source>
+        <definition xml:lang="en">Information about the rights/entitlements held in and over the ontology/resource.</definition>
+        <scopeNote xml:lang="en">It is assumed that the rights property (and its sub-properties) only apply at the ontology level.</scopeNote>
         <rdfs:comment xml:lang="en">Typically, rights information includes a statement about various property rights associated with the ontology/resource, including intellectual property rights.</rdfs:comment>
-        <metadata:prefLabel xml:lang="en">rights</metadata:prefLabel>
+        <prefLabel xml:lang="en">rights</prefLabel>
     </owl:AnnotationProperty>
     
 
@@ -395,21 +397,21 @@ Term: rights</metadata:source>
     <!-- https://github.com/NinePts/reusable-ontologies/metadata/consolidated-metadata#source -->
 
     <owl:AnnotationProperty rdf:about="&metadata;source">
-        <metadata:example xml:lang="en">Dublin Core Metadata Element Set, V1.1
+        <example xml:lang="en">Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
-Term: source</metadata:example>
-        <metadata:exactMatch>http://purl.org/dc/elements/1.1/source</metadata:exactMatch>
-        <metadata:definition xml:lang="en">A related resource from which the defined entity/resource is derived.</metadata:definition>
-        <metadata:source xml:lang="en">Dublin Core Metadata Element Set, V1.1
+Term: source</example>
+        <source xml:lang="en">Dublin Core Metadata Element Set, V1.1
 http://dublincore.org/documents/dces/
 
-Term: source</metadata:source>
-        <metadata:scopeNote xml:lang="en">Ideally, both a title and a URI or other identification schema for the resource are provided.  An example of another identification scheme is an ISBN reference for a publication.
+Term: source</source>
+        <scopeNote xml:lang="en">Ideally, both a title and a URI or other identification schema for the resource are provided.  An example of another identification scheme is an ISBN reference for a publication.
 
-If further information can be provided to pinpoint the exact source of the information, that too should be noted.</metadata:scopeNote>
+If further information can be provided to pinpoint the exact source of the information, that too should be noted.</scopeNote>
         <rdfs:comment xml:lang="en">The described entity may be derived from the related resource in whole or in part.  Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.</rdfs:comment>
-        <metadata:prefLabel xml:lang="en">source of definition and/or values</metadata:prefLabel>
+        <exactMatch>http://purl.org/dc/elements/1.1/source</exactMatch>
+        <definition xml:lang="en">A related resource from which the defined entity/resource is derived.</definition>
+        <prefLabel xml:lang="en">source of definition and/or values</prefLabel>
     </owl:AnnotationProperty>
 </rdf:RDF>
 
