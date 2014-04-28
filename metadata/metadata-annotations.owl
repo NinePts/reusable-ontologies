@@ -3,56 +3,155 @@
 
 <!DOCTYPE rdf:RDF [
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
     <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY metadata-annotations "https://purl.org/ninepts/metadata/metadata-annotations#" >
+    <!ENTITY metadata-annotations "http://purl.org/ninepts/metadata/metadata-annotations#" >
 ]>
 
 
-<rdf:RDF xmlns="https://purl.org/ninepts/metadata/metadata-annotations#"
-     xml:base="https://purl.org/ninepts/metadata/metadata-annotations"
+<rdf:RDF xmlns="http://purl.org/ninepts/metadata/metadata-annotations#"
+     xml:base="http://purl.org/ninepts/metadata/metadata-annotations"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:metadata-annotations="https://purl.org/ninepts/metadata/metadata-annotations#"
+     xmlns:metadata-annotations="http://purl.org/ninepts/metadata/metadata-annotations#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace">
-    <owl:Ontology rdf:about="https://purl.org/ninepts/metadata/metadata-annotations">
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <owl:Ontology rdf:about="http://purl.org/ninepts/metadata/metadata-annotations">
         <license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</license>
         <rdfs:seeAlso rdf:datatype="&xsd;anyURI">http://purl.org/ninepts/metadata/metadata-properties.owl</rdfs:seeAlso>
-        <anotherFormatOf rdf:datatype="&xsd;anyURI">http://purl.org/ninepts/metadata/metadata-annotations.ofn</anotherFormatOf>
-        <dateLastModified>2014-04-16</dateLastModified>
-        <keyword xml:lang="en">Dublin Core</keyword>
-        <scopeNote xml:lang="en">It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+SELECT ?s, ?work WHERE { 
+   ?s &lt;skos:editorialNote&gt; ?work . 
+} 
+# What work remains to be done on the ontology, and what decisions still need to be made?</competencyQuery>
+        <dateCreated>2014-04-16</dateCreated>
+        <skos:changeNote xml:lang="en">28 April 2014
+* Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
+** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
+* Removed the definition property (since description can be used), the coverage properties (since their semantics are not precise and keywords are available), and the usageNote property (since scopeNote could be used instead)
+* Completed the metadata details of the remaining properties
+* Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
+* Renamed the property, replaces, to replacementFor
+* Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS</skos:changeNote>
+        <skos:prefLabel xml:lang="en">Metadata Ontology (Using Annotation Properties)</skos:prefLabel>
+        <dc:description xml:lang="en">Ontology providing a small, basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties.</dc:description>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+SELECT ?s, ?change WHERE { 
+   ?s &lt;skos:changeNote&gt; ?change . 
+} 
+# How has the ontology evolved? What changes have been documented in the ontology?</competencyQuery>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+SELECT ?metadata WHERE { 
+    ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   OPTIONAL {
+      ?metadata &lt;skos:example&gt; ?example . 
+   } . 
+   FILTER ( 
+      !bound(?example) 
+   ) 
+} 
+# What metadata properties in the ontology have no example?</competencyQuery>
+        <skos:scopeNote xml:lang="en">It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
 Also note that where the concepts overlap in Dublin Core and SKOS, only one annotation property is created.  (But the mappingRelation properties will indicate both mappings.) An example of this is the correspondence between Dublin Core&apos;s title and SKOS&apos; prefLabel.
 
 What follows is a list of the Dublin Core Elements vocabulary and SKOS model concepts that are not included in this ontology (and why):
 
+ - DC:coverage (spatial/temporal topic) - Coverage is of limited use because it is not restricted with respect to vocabulary or temporal/spatial format.  Also, one cannot know if the value defines a topic, applicability or jurisdiction. Time and location will be defined as separate ontologies with more precise semantics.  
  - DC:format (file and mime formats) - Can be achieved using the mimeType property. 
  - DC:identifier (unambiguous reference) - The URI of an entity provides this reference.
  - DC:publisher - The source of the ontology may be determined from its IRI, copyright, or similar properties.  Typically, an ontology is made available on a web site, installed with software, etc. and is copyrighted. 
  - DC:source - The mappingRelation sub-properties (taken from SKOS) provide more explicit information regarding the source/origin of an ontology or its components.
  - DC:type (DCMI Type) - DCMI types include software, images, etc. and MIME types.  Instead of the general DCMI type, a mimeType property is defined.
- - SKOS:Concept (unit of thought) - A class definition with its metadata defines a Concept.
+ - SKOS:Concept (unit of thought) - A class definition with its metadata corresponds to a Concept.
  - SKOS:ConceptScheme and inScheme (collection of concepts) - An ontology (and its namespace) collects related concepts.
  - SKOS:Collection, OrderedCollection, member, memberList - Will be defined in a separate ontology dealing specifically with the Collection semantic.
+ - SKOS:definition - Use the dc: description property instead.
  - SKOS:hasTopConcept and topConceptOf (defines the top Concept in a ConceptScheme) - Can be achieved by subclassing from owl:Top for an ontology.
- - SKOS:semanticRelation, broader, narrower, related, broaderTransitive, narrowerTransitive - Can be achieved using subclassing.
+ - SKOKS:notation - Can be achieved by defining a new data type and referencing it in a value or as the range of a data property.
+ - SKOS:semanticRelation, related, broader, narrower, broaderTransitive, narrowerTransitive - Can be achieved using subclassing.  The related semantic is equivalent to an owl SymmetricProperty.
  - SKOS:relatedMatch - Can be achieved by using the mappingRelation property (and not the more specific sub-properties).
 
-</scopeNote>
-        <rdfs:comment xml:lang="en">This ontology is a consolidation of basic metadata concepts from the Dublin Core Element and Terms vocabularies, and the SKOS data model.  The semantics are captured as annotation properties.
-
-Note that the ontology referenced using the seeAlso property defines several of the annotation properties as data and object properties.  This allows (for example) validating  dateTime values and referencing objects/individuals in relations (as opposed to using literal values). </rdfs:comment>
-        <language>en-US</language>
-        <dateCreated>2014-04-16</dateCreated>
-        <creator>Andrea Westerinen
-Nine Points Solutions, LLC</creator>
-        <prefLabel xml:lang="en">Basic Metadata Annotation Ontology</prefLabel>
-        <description xml:lang="en">Ontology providing a basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties.</description>
+</skos:scopeNote>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+SELECT ?metadata WHERE { 
+   ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   FILTER ( 
+      regex(str(?metadata), &quot;skos/core&quot;) || regex(str(?metadata), &quot;dc/elements&quot;) 
+   ) 
+} 
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?</competencyQuery>
+        <mimeType>application/rdf+xml</mimeType>
+        <dateLastModified>2014-04-28</dateLastModified>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
+   ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   ?metadata ?mapping ?stdConcept . 
+   FILTER ( 
+      regex(str(?mapping), &quot;closeMatch&quot;) || regex(str(?mapping), &quot;exactMatch&quot;) || 
+      regex(str(?mapping), &quot;inspiredBy”) || regex(str(?mapping), &quot;moreGeneralThan”) ||  
+      regex(str(?mapping), &quot;moreSpecificThan”) 
+   ) . 
+   FILTER ( 
+      regex(str(? stdConcept), &quot;skos/core”) || regex(str(? stdConcept), &quot;dc/elements”) 
+   ) 
+} 
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?</competencyQuery>
+        <competencyQuestions>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX meta: &lt;http://purl.org/ninepts/metadata/metadata-annotations#&gt;
+SELECT ?query WHERE { 
+   ?s &lt;meta:competencyQuery&gt; ?query . 
+} 
+# What queries should be run to validate the ontology?</competencyQuestions>
+        <keyword xml:lang="en">Dublin Core</keyword>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+SELECT ?metadata, ?example WHERE { 
+   ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   ?metadata &lt;skos:example&gt; ?example . 
+} 
+# What is an example of the use of each of the metadata properties?</competencyQuery>
+        <dc:creator>Andrea Westerinen
+Nine Points Solutions, LLC</dc:creator>
+        <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
+        <competencyQuery>SELECT ?p, ?o WHERE { 
+   &lt;http://purl.org/ninepts/metadata/metadata-annotations&gt; ?p ?o . 
+} 
+# What metadata information is available for the ontology?</competencyQuery>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+SELECT ?metadata, ?scope WHERE { 
+   ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   ?metadata &lt;skos:scopeNote&gt; ?scope . 
+} 
+# Are there any restrictions or suggestions for the use of the various metadata properties?</competencyQuery>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
+SELECT ?metadata, ?description WHERE { 
+   ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   ?metadata &lt;dc:description&gt; ?description . 
+} 
+# What is the meaning/semantic of each of the metadata properties?</competencyQuery>
+        <keyword xml:lang="en">SKOS</keyword>
         <license xml:lang="en">The MIT License (MIT)
 
 Copyright (c) 2014 Nine Points Solutions, LLC
@@ -74,14 +173,42 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</license>
-        <usageNote xml:lang="en">This ontology is intended to be usable/imported to any ontology to provide basic metadata for provenance and reuse. It is designed to be independent of any specific domain.
+        <skos:scopeNote xml:lang="en">This ontology is intended to be usable/imported to any ontology to provide basic metadata for provenance and reuse. It is designed to be independent of any specific domain.
 
-Issues with the ontology may be entered and tracked at https://github.com/NinePts/reusable-ontologies/.</usageNote>
+NOTE: When querying or hand-editing this ontology (or one that imports this ontology), take care to use the correct namespace for the properties.  The base URI is http://purl.org/ninepts/metadata/metadata-annotations#.  The namespaces, http://purl.org/dc/elements/1.1/ and http://www.w3.org/2004/02/skos/core#, are also used.
+
+Issues with the ontology may be entered and tracked at http://github.com/NinePts/reusable-ontologies/.</skos:scopeNote>
+        <dc:language>en-US</dc:language>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
+SELECT ?metadata WHERE { 
+    ?metadata &lt;rdf:type&gt; &lt;owl:AnnotationProperty&gt; . 
+   OPTIONAL {
+      ?metadata &lt;dc:description&gt; ?description . 
+   } . 
+   FILTER ( 
+      !bound(?description) 
+   ) 
+} 
+# What metadata properties in the ontology have no description?</competencyQuery>
+        <owl:priorVersion>0.1.0</owl:priorVersion>
+        <competencyQuestions xml:lang="en">* What metadata information is available for the ontology?
+* What is the meaning/semantic of each of the metadata properties?
+* What is an example of the use of each of the metadata properties?
+* Are there any restrictions or suggestions for the use of the various metadata properties?
+* How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?
+* How has the ontology evolved? What changes have been documented in the ontology?
+* What work remains to be done on the ontology, and what decisions still need to be made?
+* What queries should be run to validate the ontology?
+* What metadata properties have no description or no example?</competencyQuestions>
+        <rdfs:comment xml:lang="en">This ontology is a consolidation of basic metadata concepts from the Dublin Core Element and Terms vocabularies, and the SKOS data model.  The semantics are captured as annotation properties.  
+
+Where the concepts are widely deployed from Dublin Core and SKOS, the property names use the full URIs from those sources.  For example, the property name of &quot;description&quot; is the Dublin Core URI, http://purl.org/dc/elements/1.1/description, and does not use this ontology&apos;s namespace.  This allows tooling that &quot;understands&quot; the standard terms (like description or SKOS&apos; prefLabel) to immediately recognize (and appropriately present) the concepts.
+
+Note that the ontology referenced using the seeAlso property (http://purl.org/ninepts/metadata/metadata-properties.ofn) defines several of the  annotation properties as data and object properties.  This allows (for example) validating  dateTime values and referencing objects/individuals in relations (as opposed to using literal values). </rdfs:comment>
         <keyword xml:lang="en">metadata</keyword>
-        <mimeType>application/rdf+xml</mimeType>
-        <copyright xml:lang="en">Copyright (c) 2014 Nine Points Solutions, LLC</copyright>
-        <keyword xml:lang="en">SKOS</keyword>
-        <owl:versionIRI rdf:resource="https://purl.org/ninepts/metadata/metadata-annotations/0.1.0"/>
+        <owl:versionIRI rdf:resource="http://purl.org/ninepts/metadata/metadata-annotations/0.2.0"/>
     </owl:Ontology>
     
 
@@ -97,370 +224,350 @@ Issues with the ontology may be entered and tracked at https://github.com/NinePt
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#altLabel -->
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;altLabel">
+    <owl:AnnotationProperty rdf:about="&dc;contributor">
+        <dc:description xml:lang="en">An entity responsible for making contributions to an ontology, class, property or individual.</dc:description>
+        <skos:example xml:lang="en">Andrea Westerinen (a person&apos;s name)</skos:example>
+        <rdfs:comment xml:lang="en">Examples of a contributor include a person, an organization or a service. Typically, the name of a contributor should be used to indicate the entity.</rdfs:comment>
+        <skos:example xml:lang="en">Nine Points Solutions, LLC (a company/organization name)</skos:example>
+        <skos:scopeNote xml:lang="en">This property is intended to be used at the level of the ontology, although a specific class, property or individual may be labeled with a contributor.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">contributor</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">contributors</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="&dc;creator">
+        <dc:description xml:lang="en">An entity responsible for initially defining the ontology, class, property or individual.</dc:description>
+        <skos:example xml:lang="en">Andrea Westerinen (a person&apos;s name)</skos:example>
+        <rdfs:comment xml:lang="en">Examples of a creator include a person, an organization or a service. Typically, the name of a creator should be used to indicate the entity.</rdfs:comment>
+        <skos:example xml:lang="en">Nine Points Solutions, LLC (a company/organization name)</skos:example>
+        <skos:scopeNote xml:lang="en">This property is intended to be used at the level of the ontology, although a specific class, property or individual may be labeled with a creator.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">creator</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">creators</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/date -->
+
+    <owl:AnnotationProperty rdf:about="&dc;date">
+        <skos:example rdf:datatype="&xsd;dateTime">2014-05-21T07:33:03</skos:example>
+        <skos:example>2014-05-21</skos:example>
+        <dc:description xml:lang="en">A point or period of time associated with an event in the lifecycle of the ontology.</dc:description>
+        <rdfs:comment xml:lang="en">Date may be used to express temporal information at any level of granularity.  Recommended best practice is to use an encoding scheme, such as the W3CDTF profile of ISO 8601.</rdfs:comment>
+        <skos:scopeNote xml:lang="en">Use of this property is not recommended.  Instead, use one of its subproperties since they define explicit semantics and format.
+
+When defining dates for individuals, it is recommended that a data property be used.  The corresponding data property is defined in the metadata-properties ontology.
+
+Note that the date/time format defined by Dublin Core is not a valid date/time datatype in OWL 2.  The Dublin Core date/time information would have to be converted to the OWL format, or imported as an OWL literal.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">date</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">dates</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description">
+        <closeMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#definition</closeMatch>
+        <dc:description xml:lang="en">An explanation of an ontology, concept, property or individual.  Descriptions are typically longer forms of definitions and/or elaborate on a definition.</dc:description>
+        <skos:example xml:lang="en">An explanation of the meaning of a concept, the characteristics or information about an individual, etc.</skos:example>
+        <rdfs:comment xml:lang="en">Description may include but is not limited to an abstract, a graphical representation, a free-text account, etc.</rdfs:comment>
+        <skos:scopeNote xml:lang="en">If desired, a definition annotation property may also be created, although that is not done in this ontology.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">description</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">descriptions</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/language -->
+
+    <owl:AnnotationProperty rdf:about="&dc;language">
+        <dc:description xml:lang="en">The (natural) language in which the ontology, class, property or individual is expressed.</dc:description>
+        <skos:example>en-US</skos:example>
+        <rdfs:comment xml:lang="en">Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646.</rdfs:comment>
+        <skos:scopeNote xml:lang="en">When applied to an ontology, the property defines the primary language used to specify the classes, properties and individuals.  Note that some classes, properties and individuals may be specified in another language, and will carry their own language annotation.  Also, a XML language attribute may be added to any literal value.
+
+Language values must follow the syntax defined in IETF RFC 4646.  The RFC is available at http://www.ietf.org/rfc/rfc4646.txt.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">language</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">languages</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/relation -->
+
+    <owl:AnnotationProperty rdf:about="&dc;relation">
+        <dc:description xml:lang="en">A reference to a related entity.</dc:description>
+        <skos:example xml:lang="en">ISBN reference</skos:example>
+        <rdfs:comment xml:lang="en">Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.</rdfs:comment>
+        <skos:scopeNote xml:lang="en">Use of this property is not recommended.  Instead, use of one of its subproperties is recommended since those properties define explicit semantics and format.</skos:scopeNote>
+        <skos:example xml:lang="en">http://namespace_info/some_entity - relation - http://namespace_info/some_related_entity</skos:example>
+        <skos:prefLabel xml:lang="en">relation</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">relations</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/rights -->
+
+    <owl:AnnotationProperty rdf:about="&dc;rights">
+        <dc:description xml:lang="en">Information about the entitlements held in and over the ontology.</dc:description>
+        <skos:scopeNote xml:lang="en">It is assumed that the rights property (and its sub-properties) only apply at the ontology level.
+
+Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different rights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different rights be placed in different ontologies and different ontology files.</skos:scopeNote>
+        <skos:example xml:lang="en">MIT License (license details)</skos:example>
+        <rdfs:comment xml:lang="en">Typically, rights information includes a statement about various property rights associated with the ontology, including intellectual property rights.</rdfs:comment>
+        <prefLabel_Plural xml:lang="en">rights</prefLabel_Plural>
+        <skos:prefLabel xml:lang="en">rights</skos:prefLabel>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#altLabel_Plural -->
+
+    <owl:AnnotationProperty rdf:about="&metadata-annotations;altLabel_Plural">
+        <skos:example xml:lang="en">Alternate Labels (versus the prefLabel_Plural, Alternative Labels)</skos:example>
+        <skos:scopeNote xml:lang="en">Plural forms of altLabels are not needed for single valued/functional properties (since each entity will only have 1 value for the property), or the name/title of an individual.
+
+Note that the plural form of an altLabel can be specified simply as an altLabel.  But, this is confusing when choosing/displaying labels, and pluralization is not always simple.  For this reason, the plural forms of alternative labels are recommended to be placed in a specific property, altLabel_Plural.
+
+Since relationships between annotation property values cannot be defined, it is not possible to define the correspondence between the singular and plural forms of a label.</skos:scopeNote>
+        <dc:description xml:lang="en">The (optional) plural form of an altLabel, in a given natural language, useful for human-readable representations.  The alternatives may be synonyms, acronyms, abbreviations, spelling variations, etc.</dc:description>
+        <skos:altLabel xml:lang="en">alternate label (plural)</skos:altLabel>
+        <altLabel_Plural xml:lang="en">alternate labels (plurals)</altLabel_Plural>
+        <skos:prefLabel xml:lang="en">alternative label (plural)</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">alternative labels (plurals)</prefLabel_Plural>
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;anotherFormatOf">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;relation"/>
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/hasFormat</exactMatch>
+        <skos:scopeNote xml:lang="en">Note that this relationship can be interpreted as symmetric and transitive.</skos:scopeNote>
+        <dc:description xml:lang="en">References an ontology, class, property or individual that is substantially the same as the subject of this relation, but in another format.</dc:description>
+        <skos:prefLabel xml:lang="en">another format of</skos:prefLabel>
+        <skos:example xml:lang="en">http://some_namespace/ontology-es.ofn - anotherFormatOf - http://some_namespace/ontology.ofn (a version of the ontology, rendered using Spanish as the native language, is &quot;anotherFormatOf&quot; the original ontology)</skos:example>
+        <skos:example xml:lang="en">http://some_namespace/ontology.rdf - anotherFormatOf - http://some_namespace/ontology.ofn (the ontology serialized using RDF/XML is anotherFormatOf the ontology serialized using OWL Functional Syntax)</skos:example>
+        <rdfs:subPropertyOf rdf:resource="&dc;relation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#closeMatch -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#closeMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;closeMatch">
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <exactMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#closeMatch</exactMatch>
+        <skos:scopeNote xml:lang="en">Note that this relationship is NOT considered to be transitive.</skos:scopeNote>
+        <dc:description xml:lang="en">References an ontology, class, property or individual that is &quot;sufficiently similar&quot; as to be used interchangeably.  The match only has meaning in applications that are aware of both the subject and object of the relationship, and should not be interpreted as transitive.</dc:description>
+        <skos:prefLabel xml:lang="en">close match</skos:prefLabel>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - closeMatch - http://some_other_namespace/some_similar_entity</skos:example>
         <rdfs:subPropertyOf rdf:resource="&metadata-annotations;mappingRelation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#contributor -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;contributor">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/contributor</exactMatch>
-        <definition xml:lang="en">An entity responsible for making contributions to an ontology, class, property or individual.</definition>
-        <example>Andrea Westerinen</example>
-        <prefLabel xml:lang="en">Contributor</prefLabel>
-        <rdfs:comment xml:lang="en">Examples of a contributor include a person, an organization or a service. Typically, the name of a contributor should be used to indicate the entity.</rdfs:comment>
-        <example>Nine Points Solutions, LLC</example>
-        <usageNote xml:lang="en">This property is intended to be used at the level of the ontology, although a specific class, property or individual may be labeled with a contributor.</usageNote>
+    <owl:AnnotationProperty rdf:about="&metadata-annotations;competencyQuery">
+        <dc:description xml:lang="en">A translation of a competency question to SPARQL.  The query can be run to validate an ontology.</dc:description>
+        <skos:scopeNote xml:lang="en">Competency questions and corresponding queries are defined for ontologies, and are not associated with classes, properties or individuals.
+
+Each query should be specified in individual competencyQuery triples.</skos:scopeNote>
+        <skos:example xml:lang="en">SELECT * WHERE {?s ?p ?o}</skos:example>
+        <prefLabel_Plural xml:lang="en">competency queries</prefLabel_Plural>
+        <skos:prefLabel xml:lang="en">competency query</skos:prefLabel>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#copyright -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions -->
+
+    <owl:AnnotationProperty rdf:about="&metadata-annotations;competencyQuestions">
+        <dc:description xml:lang="en">Competency questions (per the 1995 paper by Gruninger and Fox) are &quot;requirements that are in the form of questions that [the] ontology must be able to answer.&quot;  The questions can be translated to queries and help to define the scope of the ontology.</dc:description>
+        <skos:scopeNote xml:lang="en">Competency questions are defined for ontologies, and are not associated with classes, properties or individuals.
+
+Whereas the query corresponding to each question is defined in different competencyQuery triples, there should be only one triple defined with the competencyQuestions predicate.</skos:scopeNote>
+        <skos:example xml:lang="en">The following competency questions are taken from the Ontology Development 101 web page  (http://protege.stanford.edu/publications/ontology_development/ontology101-noy-mcguinness.html), &quot;Step 1. Determine the domain and scope of the ontology&quot; for a food and wine ontology:
+* Which wine characteristics should I consider when choosing a wine?
+* Is Bordeaux a red or white wine?
+* Does Cabernet Sauvignon go well with seafood?
+* What is the best choice of wine for grilled meat?
+* Does a bouquet or body of a specific wine change with vintage year?
+* What were good vintages for Napa Zinfandel?</skos:example>
+        <skos:prefLabel xml:lang="en">competency questions</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">competency questions</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#copyright -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;copyright">
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/rights</moreSpecificThan>
-        <prefLabel xml:lang="en">Copyright</prefLabel>
-        <example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</example>
-        <usageNote xml:lang="en">It is assumed that the copyright property only applies at the ontology level.
+        <skos:example xml:lang="en">Copyright (c) 2014, Nine Points Solutions, LLC</skos:example>
+        <skos:scopeNote xml:lang="en">It is assumed that the copyright property only applies at the ontology level.
 
-Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different copyrights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different copyrights be placed in different ontologies and different ontology files.</usageNote>
-        <definition xml:lang="en">The copyright statement for an ontology.  Per WordNet, copyright is &quot;the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.&quot;</definition>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;rights"/>
+Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different copyrights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different copyrights be placed in different ontologies and different ontology files.</skos:scopeNote>
+        <dc:description xml:lang="en">The copyright statement for an ontology.  Per WordNet, copyright is &quot;the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.&quot;</dc:description>
+        <skos:prefLabel xml:lang="en">copyright</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">copyrights</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&dc;rights"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#coverage -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;coverage">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/coverage</exactMatch>
-        <prefLabel xml:lang="en">Coverage</prefLabel>
-        <rdfs:comment xml:lang="en">Spatial topic and applicability may be a named place or a location specified by its geographic coordinates. A temporal topic may be a named period, date or date range.  A jurisdiction may be a named administrative entity or a geographic place to which the ontology, class, property or individual applies.  Recommended best practice is to use a controlled vocabulary such as the Thesaurus of Geographic Names.  Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.</rdfs:comment>
-        <definition xml:lang="en">The spatial or temporal topic of the ontology, class, property or individual, its spatial applicability, or the jurisdiction under which it is relevant.</definition>
-        <usageNote xml:lang="en">This property is of limited value, and would be useful mainly for display purposes. This is because it is not possible to know which controlled vocabulary or temporal/spatial format was used to define a value, or whether the value defines a topic, applicability or jurisdiction. This uncertainty presents a severe drawback to interpreting the data. </usageNote>
-        <example xml:lang="en">United States of America</example>
-        <example xml:lang="es">Estados Unidos de América</example>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#coverage_TGNVocab -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;coverage_TGNVocab">
-        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/coverage</moreSpecificThan>
-        <usageNote xml:lang="en">Although semantically richer (and more specific) than the coverage property, coverage_TGNVocab is still limited. This is because it is not possible to know whether the value defines a topic, applicability or jurisdiction.  </usageNote>
-        <prefLabel xml:lang="en">Coverage (Defined Using the Getty TGN Vocabulary)</prefLabel>
-        <rdfs:comment xml:lang="en">Note that the Getty Research Institute is releasing its vocabularies as LOD.  It plans to release the thesaurus as LOD in July, 2014.  
-
-That will enable straightforward validation of the values of the property.  </rdfs:comment>
-        <definition xml:lang="en">The spatial topic of the ontology, class, property or individual, its spatial applicability, or the jurisdiction under which it is relevant, defined using the vocabulary of the Getty Thesaurus of Geographic Names.</definition>
-        <example xml:lang="en">United States of America</example>
-        <scopeNote xml:lang="en">Values for the property are taken from the Getty Thesaurus of Geographic Names.  The thesaurus can be found at http://www.getty.edu/vow/TGNHierarchy?find=&amp;place=&amp;nation=&amp;english=Y&amp;subjectid=7029392.</scopeNote>
-        <example xml:lang="es">Estados Unidos de América</example>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;coverage"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#creator -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;creator">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/creator</exactMatch>
-        <definition>An entity responsible for initially defining the ontology, class, property or individual.</definition>
-        <example>Nine Points Solutions, LLC</example>
-        <example>Andrea Westerinen</example>
-        <prefLabel xml:lang="en">Creator</prefLabel>
-        <rdfs:comment xml:lang="en">Examples of a creator include a person, an organization or a service. Typically, the name of a creator should be used to indicate the entity.</rdfs:comment>
-        <usageNote xml:lang="en">This property is intended to be used at the level of the ontology, although a specific class, property or individual may be labeled with a creator.</usageNote>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#date -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;date">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/date</exactMatch>
-        <definition xml:lang="en">A point or period of time associated with an event in the lifecycle of the ontology.</definition>
-        <prefLabel xml:lang="en">Date</prefLabel>
-        <rdfs:comment xml:lang="en">Date may be used to express temporal information at any level of granularity.  Recommended best practice is to use an encoding scheme, such as the W3CDTF profile of ISO 8601.</rdfs:comment>
-        <usageNote xml:lang="en">Use of this property is not recommended.  Instead, use of one of its subproperties is recommended since those properties define explicit semantics.</usageNote>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#dateCreated -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#dateCreated -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;dateCreated">
-        <exactMatch rdf:datatype="&xsd;anyURI"> http://purl.org/dc/terms/created</exactMatch>
+        <closeMatch rdf:datatype="&xsd;anyURI"> http://purl.org/dc/terms/created</closeMatch>
+        <skos:example rdf:datatype="&xsd;dateTime">2014-04-14T12:45:00</skos:example>
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/date</moreSpecificThan>
-        <example>2014-04-14</example>
-        <prefLabel xml:lang="en">Date Created</prefLabel>
-        <definition xml:lang="en">The point or period of time (for example, the year) when the ontology, class, property or individual was created.</definition>
-        <usageNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was created. Use of the property for individuals may be valuable (for example, to record when a trouble ticket was reported/created) but this use is not mandatory. 
+        <skos:example>2014-04-14</skos:example>
+        <dc:description xml:lang="en">The point or period of time (for example, the year) when the ontology, class, property or individual was created.</dc:description>
+        <skos:scopeNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was created. Use of a data property is recommended for individuals (for example, to record when a trouble ticket was reported/created).  The corresponding data property is defined in the metadata-properties ontology.
 
-Note that the format of the data values are defined in the scopeNote.  They follow the guidelines of the W3CDTF Data and Time Formats document.</usageNote>
-        <scopeNote xml:lang="en">Values of the date property should use the format defined by the W3CDTF profile of ISO 8601.  This profile is available at http://www.w3.org/TR/NOTE-datetime, and take the forms:
-
-   Year:
-      YYYY (eg 1997)
-   Year and month:
-      YYYY-MM (eg 1997-07)
-   Complete date:
-      YYYY-MM-DD (eg 1997-07-16)
-   Complete date plus hours and minutes:
-      YYYY-MM-DDThh:mmTZD (eg 1997-07-16T19:20+01:00)
-   Complete date plus hours, minutes and seconds:
-      YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
-   Complete date plus hours, minutes, seconds and a decimal fraction of a second
-      YYYY-MM-DDThh:mm:ss.sTZD (eg 1997-07-16T19:20:30.45+01:00)
-
-where:
-
-     YYYY = four-digit year
-     MM   = two-digit month (01=January, etc.)
-     DD   = two-digit day of month (01 through 31)
-     hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
-     mm   = two digits of minute (00 through 59)
-     ss   = two digits of second (00 through 59)
-     s    = one or more digits representing a decimal fraction of a second
-     TZD  = time zone designator (Z or +hh:mm or -hh:mm)
-</scopeNote>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;date"/>
+In Dublin Core, values of the created date property use the format defined by the W3CDTF profile of ISO 8601.  However, that format is not a valid date/time datatype in OWL 2.  The Dublin Core date/time created information would have to be converted to the OWL format, or imported as an OWL literal.  For this reason, the Dublin Core property is mapped as a &quot;close&quot; and not an &quot;exact&quot; match.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">date created</skos:prefLabel>
+        <rdfs:subPropertyOf rdf:resource="&dc;date"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#dateLastModified -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;dateLastModified">
-        <example>2014-04-16</example>
-        <definition xml:lang="en">A point or period of time (for example, the year) when the ontology, class, property or individual was last modified.</definition>
-        <prefLabel xml:lang="en">Date Last Modified</prefLabel>
-        <usageNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was last modified. Use of the property for individuals may be valuable (for example, to record when a trouble ticket was last updated) but this use is not mandatory. 
+        <skos:example rdf:datatype="&xsd;dateTime">2014-04-28T23:52:00</skos:example>
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/modified</moreSpecificThan>
+        <skos:example>2014-04-28</skos:example>
+        <dc:description xml:lang="en">A point or period of time (for example, the year) when the ontology, class, property or individual was last modified.</dc:description>
+        <skos:scopeNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was last modified. Use of a data property is recommended for individuals (for example, to record when a trouble ticket was last updated).  The corresponding data property is defined in the metadata-properties ontology.
 
 If a set of modification dates is needed, as opposed to recording the date of the last change, use the dateModified property.
 
-Note that the format of the data values are defined in the scopeNote.  They follow the guidelines of the W3CDTF Data and Time Formats document.</usageNote>
-        <scopeNote xml:lang="en">Values of the date property should use the format defined by the W3CDTF profile of ISO 8601.  This profile is available at http://www.w3.org/TR/NOTE-datetime, and take the forms:
-
-   Year:
-      YYYY (eg 1997)
-   Year and month:
-      YYYY-MM (eg 1997-07)
-   Complete date:
-      YYYY-MM-DD (eg 1997-07-16)
-   Complete date plus hours and minutes:
-      YYYY-MM-DDThh:mmTZD (eg 1997-07-16T19:20+01:00)
-   Complete date plus hours, minutes and seconds:
-      YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
-   Complete date plus hours, minutes, seconds and a decimal fraction of a second
-      YYYY-MM-DDThh:mm:ss.sTZD (eg 1997-07-16T19:20:30.45+01:00)
-
-where:
-
-     YYYY = four-digit year
-     MM   = two-digit month (01=January, etc.)
-     DD   = two-digit day of month (01 through 31)
-     hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
-     mm   = two digits of minute (00 through 59)
-     ss   = two digits of second (00 through 59)
-     s    = one or more digits representing a decimal fraction of a second
-     TZD  = time zone designator (Z or +hh:mm or -hh:mm)
-</scopeNote>
+Note that in Dublin Core, values of the modified date property use the format defined by the W3CDTF profile of ISO 8601.  However, that format is not a valid date/time datatype in OWL 2.  The Dublin Core date/time modified information would have to be converted to the OWL format, or imported as an OWL literal.  </skos:scopeNote>
+        <skos:prefLabel xml:lang="en">date last modified</skos:prefLabel>
         <moreSpecificThan xml:lang="en">http://purl.org/dc/elements/1.1/date</moreSpecificThan>
         <rdfs:subPropertyOf rdf:resource="&metadata-annotations;dateModified"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#dateModified -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#dateModified -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;dateModified">
+        <skos:example rdf:datatype="&xsd;dateTime">2014-04-16T17:12:00</skos:example>
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/date</moreSpecificThan>
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/modified</exactMatch>
-        <example>2014-04-16</example>
-        <definition xml:lang="en">A point or period of time (for example, the year) when the ontology, class, property or individual was modified.</definition>
-        <prefLabel xml:lang="en">Date Modified</prefLabel>
-        <usageNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was modified. Use of the property for individuals may be valuable (for example, to record when a trouble ticket was updated) but this use is not mandatory. 
+        <closeMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/modified</closeMatch>
+        <skos:example>2014-04-16</skos:example>
+        <dc:description xml:lang="en">A point or period of time (for example, the year) when the ontology, class, property or individual was modified.</dc:description>
+        <skos:scopeNote xml:lang="en">This property is intended to be used at any level of the ontology, including defining the date when a particular class, property or individual was modified. Use of a data property is recommended for individuals (for example, to record when a trouble ticket was updated).  The corresponding data property is defined in the metadata-properties ontology.
 
 If a set of modification dates is not valuable, but only knowing the date of the last modification, use the dateLastModified property.
 
-Note that the format of the data values are defined in the scopeNote.  They follow the guidelines of the W3CDTF Data and Time Formats document.</usageNote>
-        <scopeNote xml:lang="en">Values of the date property should use the format defined by the W3CDTF profile of ISO 8601.  This profile is available at http://www.w3.org/TR/NOTE-datetime, and take the forms:
-
-   Year:
-      YYYY (eg 1997)
-   Year and month:
-      YYYY-MM (eg 1997-07)
-   Complete date:
-      YYYY-MM-DD (eg 1997-07-16)
-   Complete date plus hours and minutes:
-      YYYY-MM-DDThh:mmTZD (eg 1997-07-16T19:20+01:00)
-   Complete date plus hours, minutes and seconds:
-      YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
-   Complete date plus hours, minutes, seconds and a decimal fraction of a second
-      YYYY-MM-DDThh:mm:ss.sTZD (eg 1997-07-16T19:20:30.45+01:00)
-
-where:
-
-     YYYY = four-digit year
-     MM   = two-digit month (01=January, etc.)
-     DD   = two-digit day of month (01 through 31)
-     hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
-     mm   = two digits of minute (00 through 59)
-     ss   = two digits of second (00 through 59)
-     s    = one or more digits representing a decimal fraction of a second
-     TZD  = time zone designator (Z or +hh:mm or -hh:mm)
-</scopeNote>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;date"/>
+In Dublin Core, values of the modified date property use the format defined by the W3CDTF profile of ISO 8601.  However, that format is not a valid date/time datatype in OWL 2.  The Dublin Core date/time modified information would have to be converted to the OWL format, or imported as an OWL literal.  For this reason, the Dublin Core property is mapped as a &quot;close&quot; and not an &quot;exact&quot; match.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">date modified</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">dates modified</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&dc;date"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#definition -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;definition">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#description -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;description">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/description</exactMatch>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#editorialNote -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;editorialNote">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#exactMatch -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#exactMatch -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;exactMatch">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;mappingRelation"/>
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <exactMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#exactMatch</exactMatch>
+        <skos:scopeNote xml:lang="en">Note that this relation is considered to be transitive.</skos:scopeNote>
+        <dc:description xml:lang="en">References a semantically similar ontology, class, property or individual.  ExactMatch indicates that the two entities have equivalent semantics, and can be used interchangeably.  By definition, this is a transitive relationship.</dc:description>
+        <skos:prefLabel xml:lang="en">exact match</skos:prefLabel>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - exactMatch - http://some_other_namespace/some_other_entity</skos:example>
+        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;closeMatch"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#example -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;example">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#hiddenLabel -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;hiddenLabel">
-        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#historyNote -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;historyNote">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#inspiredBy -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;inspiredBy">
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <dc:description xml:lang="en">References some entity which inspired the definition of the subject of the relationship.  The referenced entity could be of similar scope and definition (for example, a class in one ontology inspiring the definition of class or property in another ontology), or completely different (for example, Aristotle&apos;s classifications providing the basis for an &quot;upper&quot; ontology).</dc:description>
+        <skos:example xml:lang="en">http://some_namespace/ontology.rdf - inspiredBy - ISBN reference (to publication containing basic concepts)</skos:example>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - inspiredBy - http://some_other_namespace/some_other_entity</skos:example>
+        <skos:prefLabel xml:lang="en">inspired by</skos:prefLabel>
         <rdfs:subPropertyOf rdf:resource="&metadata-annotations;mappingRelation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#keyword -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#keyword -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;keyword">
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/subject</moreSpecificThan>
+        <dc:description xml:lang="en">A word or phrase that describes the ontology, class, property or individual.</dc:description>
+        <skos:scopeNote xml:lang="en">The keyword can be a single word or a word phrase.  The terms can be open-ended or come from a controlled vocabulary.</skos:scopeNote>
+        <skos:example xml:lang="en">a_keyword phrase (multi-word phrase)</skos:example>
+        <skos:example xml:lang="en">a_keyword_for_the_entity</skos:example>
+        <skos:prefLabel xml:lang="en">keyword</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">keywords</prefLabel_Plural>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#language -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;language">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/language</exactMatch>
-        <example>en-US</example>
-        <prefLabel xml:lang="en">Language</prefLabel>
-        <scopeNote xml:lang="en">Language values must follow the syntax defined in IETF RFC 4646.  The RFC is available at http://www.ietf.org/rfc/rfc4646.txt.</scopeNote>
-        <rdfs:comment xml:lang="en">Recommended best practice is to use a controlled vocabulary such as defined in IETF RFC 4646.</rdfs:comment>
-        <definition xml:lang="en">The (natural) language in which the ontology, class, property or individual is expressed.</definition>
-        <usageNote xml:lang="en">When applied to an ontology, the property defines the primary language used to specify the classes, properties and individuals.  Note that some classes, properties and individuals may be specified in another language, and will carry their own language annotation.
-
-As noted in the scopeNote, the values for this property must use the syntax of RFC 4646.</usageNote>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#license -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#license -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;license">
-        <example rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</example>
+        <skos:example rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</skos:example>
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/rights</moreSpecificThan>
         <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/license</exactMatch>
-        <prefLabel xml:lang="en">License</prefLabel>
-        <example xml:lang="en">Multiple types of open-source licenses can be browsed at http://opensource.org/licenses.</example>
-        <definition xml:lang="en">The licensing applied to the ontology.  A license is a legal document giving official permission to do something with the ontology.</definition>
-        <usageNote xml:lang="en">The specific wording of the license (or a reference to a location where the wording can be found) should be provided as the value of this property.  Note that both the wording AND the reference can be provided (since the former allows the license to be available offline). 
+        <skos:example xml:lang="en">Multiple types of open-source licenses can be browsed at http://opensource.org/licenses.</skos:example>
+        <dc:description xml:lang="en">The licensing applied to the ontology.  A license is a legal document giving official permission to do something with the ontology.</dc:description>
+        <skos:scopeNote xml:lang="en">The specific wording of the license (or a reference to a location where the wording can be found) should be provided as the value of this property.  Note that both the wording AND the reference can be provided (since the former allows the license to be available offline). 
 
 It is assumed that the license property only applies at the ontology level.
 
-Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different licenses for entities within the ontology (different from the licenses defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different licenses be placed in different ontologies and different ontology files.</usageNote>
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;rights"/>
+Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different licenses for entities within the ontology (different from the licenses defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different licenses be placed in different ontologies and different ontology files.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">license</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">licenses</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&dc;rights"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#mappingRelation -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;mappingRelation">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;relation"/>
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <exactMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#mappingRelation</exactMatch>
+        <skos:scopeNote xml:lang="en">It is recommended that one of the sub-properties of mappingRelation be used to describe the specific semantics of the mapping.  This property is too general (under-specified) to be useful.</skos:scopeNote>
+        <dc:description xml:lang="en">References an ontology, class, property or individual which can be mapped to the subject of the relationship.</dc:description>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - mappingRelation - http://some_other_namespace/some_other_entity</skos:example>
+        <skos:prefLabel xml:lang="en">mapping relation</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">mapping relations</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&dc;relation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#mimeType -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#mimeType -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;mimeType">
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/format</moreSpecificThan>
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/type</moreSpecificThan>
-        <prefLabel xml:lang="en">MIME Type</prefLabel>
-        <scopeNote xml:lang="en">Possible values of MIME type for OWL ontologies are:
+        <skos:scopeNote xml:lang="en">This property is intended to be used at the level of the ontology, to define the serialization format in which the ontology was/is encoded.  There is only one serialization format per file.
 
+Note that when the ontology is loaded into a tool or data store, the serialization format is no longer relevant.
+
+Possible values of MIME type for OWL ontologies are:
  - text/owl-functional (extension .ofn)
  - text/owl-manchester (extension .omn)
  - application/owl+xml (extension .owx)
@@ -468,100 +575,214 @@ Although the property could be applied to any OWL construct, it is discouraged t
  - text/turtle (extension .ttl)
 
 These values are taken from the IANA Media Type definitions, available at 
-http://www.iana.org/assignments/media-types/media-types.xhtml.</scopeNote>
-        <definition xml:lang="en">The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
-</definition>
-        <example>text/owl-functional</example>
-        <usageNote xml:lang="en">This property is intended to be used at the level of the ontology, to define the serialized format in which the ontology was/is encoded.
-
-Note that when the ontology is loaded into a tool or data store, the serialization format is no longer relevant.
-
-Various specific values for the property are listed in the scopeNote.</usageNote>
+http://www.iana.org/assignments/media-types/media-types.xhtml.</skos:scopeNote>
+        <skos:example>text/owl-functional</skos:example>
+        <dc:description xml:lang="en">The MIME type of the ontology, as defined by the various OWL 2 syntaxes in their W3C Recommendations, and as assigned by IANA.
+</dc:description>
+        <skos:prefLabel xml:lang="en">mime type</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">mime types</prefLabel_Plural>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;moreGeneralThan">
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <closeMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#narrowMatch</closeMatch>
+        <closeMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#narrower</closeMatch>
+        <dc:description xml:lang="en">References some entity that is a more specific concept than the subject of the relationship (i.e., the subject would be considered to be a super-type/super-property of the object).</dc:description>
+        <skos:scopeNote xml:lang="en">Typically, moreGeneralThan is used to relate class and property concepts, and not ontologies or individuals.  The relationship is particularly useful when merging/mapping ontologies, vocabularies, etc., in order to place the concepts in a subsumption hierarchy.
+
+Note that this relation can be considered to be transitive.  That is why it is only defined as a &quot;closeMatch&quot; to the SKOS concepts of narrowMatch and narrower.  (In the SKOS model, these two relations are not guaranteed to be transitive.)</skos:scopeNote>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - moreGeneralThan - http://some_namespace/some_more_specific_entity</skos:example>
+        <skos:prefLabel xml:lang="en">more general than</skos:prefLabel>
         <rdfs:subPropertyOf rdf:resource="&metadata-annotations;mappingRelation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan -->
 
     <owl:AnnotationProperty rdf:about="&metadata-annotations;moreSpecificThan">
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <closeMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#broadMatch</closeMatch>
+        <closeMatch rdf:datatype="&xsd;anyURI">http://www.w3.org/2004/02/skos/core#broader</closeMatch>
+        <dc:description xml:lang="en">References some entity that is a more general concept than the subject of the relationship (i.e., the subject would be considered to be a sub-type/sub-property of the object).</dc:description>
+        <skos:scopeNote xml:lang="en">Typically, moreSpecificThan is used to relate class and property concepts, and not ontologies or individuals.  The relationship is particularly useful when merging/mapping ontologies, vocabularies, etc., in order to place the concepts in a subsumption hierarchy.
+
+Note that this relation can be considered to be transitive.  That is why it is only defined as a &quot;closeMatch&quot; to the SKOS concepts of broadMatch and broader.  (In the SKOS model, these two relations are not guaranteed to be transitive.)</skos:scopeNote>
+        <dc:description xml:lang="en">http://some_namespace/some_entity - moreSpecificThan - http://some_namespace/some_more_general_entity</dc:description>
+        <skos:prefLabel xml:lang="en">more specific than</skos:prefLabel>
         <rdfs:subPropertyOf rdf:resource="&metadata-annotations;mappingRelation"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#notation -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;notation">
+    <owl:AnnotationProperty rdf:about="&metadata-annotations;prefLabel_Plural">
+        <skos:example xml:lang="en">Preferred Labels (versus the prefLabel, Preferred Label)</skos:example>
+        <dc:description xml:lang="en">The (optional) plural form of prefLabel for an entity, in a given natural language, useful for human-readable representations.  There is only one plural form of a preferred label per language for an entity.</dc:description>
+        <skos:scopeNote xml:lang="en">There is only one plural form of the preferred label per language for an entity.
+
+The plural form of a prefLabel is not needed for single valued/functional properties (since each entity will only have 1 value for the property), or the name/title of an individual.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">preferred label (plural)</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">preferred labels (plurals)</prefLabel_Plural>
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#note -->
+    <!-- http://purl.org/ninepts/metadata/metadata-annotations#replacementFor -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;note"/>
+    <owl:AnnotationProperty rdf:about="&metadata-annotations;replacementFor">
+        <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</moreSpecificThan>
+        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/terms/replaces</exactMatch>
+        <dc:description xml:lang="en">References an ontology, class, property or individual that is supplanted, displaced or superceded by the subject of the relation.</dc:description>
+        <skos:scopeNote xml:lang="en">The replacementFor relation can be used in many different scenarios- for example, to describe the wholesale evolution of an ontology or individual (such as a document/specification), or to describe how a class or property definition evolves over time.  In the case of the latter, a class or property could be deprecated (using the owl#deprecated annotation property), and a new entity defined that is a &quot;replacementFor&quot; it.
+
+Note that the relation can be interpreted as transitive.</skos:scopeNote>
+        <skos:example xml:lang="en">http://some_namespace/ontology_v2.ofn - replacementFor - http://some_namespace/ontology_v1.ofn</skos:example>
+        <skos:example xml:lang="en">http://some_namespace/some_entity - replacementFor -  http://some_namespace/some_deprecated_entity</skos:example>
+        <skos:prefLabel xml:lang="en">replacement for</skos:prefLabel>
+        <rdfs:subPropertyOf rdf:resource="&dc;relation"/>
+    </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#prefLabel -->
+    <!-- http://www.w3.org/2000/01/rdf-schema#comment -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;prefLabel">
+    <rdf:Description rdf:about="&rdfs;comment">
+        <skos:prefLabel xml:lang="en">comment</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">comments</prefLabel_Plural>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#label -->
+
+    <rdf:Description rdf:about="&rdfs;label">
+        <skos:prefLabel xml:lang="en">label</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">labels</prefLabel_Plural>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#priorVersion -->
+
+    <rdf:Description rdf:about="&owl;priorVersion">
+        <skos:prefLabel xml:lang="en">prior version</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">prior versions</prefLabel_Plural>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#altLabel -->
+
+    <owl:AnnotationProperty rdf:about="&skos;altLabel">
+        <dc:description xml:lang="en">A alternative label for an entity, in a given natural language, useful for human-readable representations.  The alternative may be a synonym, acronym/abbreviation, spelling variation, etc.</dc:description>
+        <skos:example xml:lang="en">Alternate Label (versus the prefLabel, Alternative Label)</skos:example>
+        <skos:scopeNote xml:lang="en">Note that a plural form of a prefLabel or altLabel is allowed as the property&apos;s value.  But, this is confusing when choosing/displaying labels.  For this reason, the plural form of prefLabel and alternative labels are recommended to be placed in specific properties, prefLabel_Plural and altLabel_Plural, respectively.</skos:scopeNote>
+        <skos:altLabel xml:lang="en">alternate label</skos:altLabel>
+        <altLabel_Plural xml:lang="en">alternate labels</altLabel_Plural>
+        <skos:prefLabel xml:lang="en">alternative label</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">alternative labels</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#changeNote -->
+
+    <owl:AnnotationProperty rdf:about="&skos;changeNote">
+        <skos:example xml:lang="en">(change note for an ontology) 
+01-May-2014 
+* Added properties, ABC and XYZ
+* Updated the description of the class, foo</skos:example>
+        <dc:description xml:lang="en">Documents fine-grained changes to an ontology, class, property or individual, for the purposes of administration and maintenance.</dc:description>
+        <skos:scopeNote xml:lang="en">It may be easiest to capture all changes to an ontology in a single change note (which is updated with each evolution of the ontology), or one can use multiple notes (one for each evolution).  However, if desired, any specific change to a class, property or individual may be described using this property.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">change note</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">change notes</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&skos;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#editorialNote -->
+
+    <owl:AnnotationProperty rdf:about="&skos;editorialNote">
+        <dc:description xml:lang="en">Documents information for an ontology, class, property or individual that aids administrative housekeeping, such as reminders of editorial work still to be done, or warnings in the event that future editorial changes might be made.</dc:description>
+        <skos:example xml:lang="en">Review the viability of this property after the decision regarding XYZ is complete.</skos:example>
+        <skos:prefLabel xml:lang="en">editorial note</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">editorial notes</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&skos;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#example -->
+
+    <owl:AnnotationProperty rdf:about="&skos;example">
+        <dc:description xml:lang="en">Describes an example of a class individual or a property value.</dc:description>
+        <skos:scopeNote xml:lang="en">Examples are relevant for classes and properties, but not for ontologies and individuals.</skos:scopeNote>
+        <skos:example xml:lang="en">For a class, Person, the individual AndreaWesterinen is an example.</skos:example>
+        <skos:example xml:lang="en">For a dateCreated property, the value &quot;23-Apr-2014&quot;^^xsd:dateTime is an example.</skos:example>
+        <skos:prefLabel xml:lang="en">example</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">examples</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&skos;note"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#hiddenLabel -->
+
+    <owl:AnnotationProperty rdf:about="&skos;hiddenLabel">
+        <dc:description xml:lang="en">A label for an entity, in a given natural language, that is not displayed to any users, but which may be used in queries.  For example, mis-spelled words may be values of this property - which are useful for search but should not be considered as viable labels.</dc:description>
+        <skos:example xml:lang="en">Hiden Label (misspelling of the prefLabel, Hidden Label)</skos:example>
+        <skos:prefLabel xml:lang="en">hidden label</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">hidden labels</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#note -->
+
+    <owl:AnnotationProperty rdf:about="&skos;note">
+        <skos:example xml:lang="en">A note can be documentation of a change, for an editor, providing an example, defining how a concept is used, etc.</skos:example>
+        <dc:description xml:lang="en">Human-readable documentation of an ontology, class, property or individual.</dc:description>
+        <skos:scopeNote xml:lang="en">It is not recommended to use the generic note property, but to use one of the more specific subproperties.  
+
+Note that rdfs:comment and dc:description properties also may be used for documentation.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">note</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">notes</prefLabel_Plural>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#prefLabel -->
+
+    <owl:AnnotationProperty rdf:about="&skos;prefLabel">
         <moreSpecificThan rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/title</moreSpecificThan>
+        <skos:example xml:lang="en">Preferred Label</skos:example>
+        <dc:description xml:lang="en">The preferred label or title for an entity, in a given natural language, useful for human-readable representations.  There is only one preferred label per language for an entity.</dc:description>
+        <skos:scopeNote xml:lang="en">There is only one preferred label per language for an entity.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">preferred label</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">preferred labels</prefLabel_Plural>
         <rdfs:subPropertyOf rdf:resource="&rdfs;label"/>
     </owl:AnnotationProperty>
     
 
 
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#relation -->
+    <!-- http://www.w3.org/2004/02/skos/core#scopeNote -->
 
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;relation">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/relation</exactMatch>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#replaces -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;replaces">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;relation"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#rights -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;rights">
-        <exactMatch rdf:datatype="&xsd;anyURI">http://purl.org/dc/elements/1.1/rights</exactMatch>
-        <definition xml:lang="en">Information about the entitlements held in and over the ontology.</definition>
-        <usageNote xml:lang="en">It is assumed that the rights property (and its sub-properties) only apply at the ontology level.
-
-Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different rights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different rights be placed in different ontologies and different ontology files.</usageNote>
-        <prefLabel xml:lang="en">Rights</prefLabel>
-        <rdfs:comment xml:lang="en">Typically, rights information includes a statement about various property rights associated with the ontology, including intellectual property rights.</rdfs:comment>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#scopeNote -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;scopeNote">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- https://purl.org/ninepts/metadata/metadata-annotations#usageNote -->
-
-    <owl:AnnotationProperty rdf:about="&metadata-annotations;usageNote">
-        <rdfs:subPropertyOf rdf:resource="&metadata-annotations;note"/>
+    <owl:AnnotationProperty rdf:about="&skos;scopeNote">
+        <dc:description xml:lang="en">Provides additional documentation (beyond the description) on the meaning or use of the ontology, class, property or individual.</dc:description>
+        <skos:example xml:lang="en">This concept should be/should not be used in the following scenarios: ...</skos:example>
+        <skos:prefLabel xml:lang="en">scope note</skos:prefLabel>
+        <prefLabel_Plural xml:lang="en">scope notes</prefLabel_Plural>
+        <rdfs:subPropertyOf rdf:resource="&skos;note"/>
     </owl:AnnotationProperty>
 </rdf:RDF>
 
