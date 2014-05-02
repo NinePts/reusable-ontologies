@@ -25,6 +25,7 @@
      xmlns:skos="http://www.w3.org/2004/02/skos/core#">
     <owl:Ontology rdf:about="http://purl.org/ninepts/metadata/metadata-annotations">
         <license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</license>
+        <anotherFormatOf rdf:datatype="&xsd;anyURI">http://purl.org/ninepts/metadata/metadata-annotations.ofn</anotherFormatOf>
         <rdfs:seeAlso rdf:datatype="&xsd;anyURI">http://purl.org/ninepts/metadata/metadata-properties.owl</rdfs:seeAlso>
         <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
@@ -33,6 +34,8 @@ SELECT ?s, ?work WHERE {
    ?s &lt;skos:editorialNote&gt; ?work . 
 } 
 # What work remains to be done on the ontology, and what decisions still need to be made?</competencyQuery>
+        <skos:changeNote xml:lang="en">01 May 2014
+* Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)</skos:changeNote>
         <dateCreated>2014-04-16</dateCreated>
         <skos:changeNote xml:lang="en">28 April 2014
 * Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
@@ -42,6 +45,7 @@ SELECT ?s, ?work WHERE {
 * Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
 * Renamed the property, replaces, to replacementFor
 * Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS</skos:changeNote>
+        <keyword xml:lang="en">Dublin Core</keyword>
         <skos:prefLabel xml:lang="en">Metadata Ontology (Using Annotation Properties)</skos:prefLabel>
         <dc:description xml:lang="en">Ontology providing a small, basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties.</dc:description>
         <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
@@ -64,6 +68,7 @@ SELECT ?metadata WHERE {
    ) 
 } 
 # What metadata properties in the ontology have no example?</competencyQuery>
+        <dateLastModified>2014-05-01</dateLastModified>
         <skos:scopeNote xml:lang="en">It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
 Also note that where the concepts overlap in Dublin Core and SKOS, only one annotation property is created.  (But the mappingRelation properties will indicate both mappings.) An example of this is the correspondence between Dublin Core&apos;s title and SKOS&apos; prefLabel.
@@ -96,7 +101,6 @@ SELECT ?metadata WHERE {
 } 
 # How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?</competencyQuery>
         <mimeType>application/rdf+xml</mimeType>
-        <dateLastModified>2014-04-28</dateLastModified>
         <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
 SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
@@ -112,14 +116,14 @@ SELECT ?metadata, ?mapping, ?stdConcept WHERE {
    ) 
 } 
 # How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?</competencyQuery>
-        <competencyQuestions>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+        <skos:editorialNote xml:lang="en">All of the competencyQueries need to be tested</skos:editorialNote>
+        <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
 PREFIX meta: &lt;http://purl.org/ninepts/metadata/metadata-annotations#&gt;
 SELECT ?query WHERE { 
    ?s &lt;meta:competencyQuery&gt; ?query . 
 } 
-# What queries should be run to validate the ontology?</competencyQuestions>
-        <keyword xml:lang="en">Dublin Core</keyword>
+# What queries should be run to validate the ontology?</competencyQuery>
         <competencyQuery>PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt; 
 PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; 
@@ -208,7 +212,7 @@ Where the concepts are widely deployed from Dublin Core and SKOS, the property n
 
 Note that the ontology referenced using the seeAlso property (http://purl.org/ninepts/metadata/metadata-properties.ofn) defines several of the  annotation properties as data and object properties.  This allows (for example) validating  dateTime values and referencing objects/individuals in relations (as opposed to using literal values). </rdfs:comment>
         <keyword xml:lang="en">metadata</keyword>
-        <owl:versionIRI rdf:resource="http://purl.org/ninepts/metadata/metadata-annotations/0.2.0"/>
+        <owl:versionIRI rdf:resource="http://purl.org/ninepts/metadata/metadata-annotations/0.5.0"/>
     </owl:Ontology>
     
 

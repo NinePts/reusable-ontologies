@@ -6,7 +6,15 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
 Ontology(<http://purl.org/ninepts/metadata/metadata-annotations>
-<http://purl.org/ninepts/metadata/metadata-annotations/0.2.0>
+<http://purl.org/ninepts/metadata/metadata-annotations/0.5.0>
+Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "28 April 2014
+* Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
+** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
+* Removed the definition property (since description can be used), the coverage properties (since their semantics are not precise and keywords are available), and the usageNote property (since scopeNote could be used instead)
+* Completed the metadata details of the remaining properties
+* Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
+* Renamed the property, replaces, to replacementFor
+* Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
@@ -20,6 +28,8 @@ SELECT ?metadata WHERE {
    ) 
 } 
 # What metadata properties in the ontology have no example?")
+Annotation(<http://purl.org/dc/elements/1.1/creator> "Andrea Westerinen
+Nine Points Solutions, LLC")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
@@ -35,15 +45,6 @@ SELECT ?metadata, ?mapping, ?stdConcept WHERE {
    ) 
 } 
 # How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?")
-Annotation(<http://purl.org/dc/elements/1.1/creator> "Andrea Westerinen
-Nine Points Solutions, LLC")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
-SELECT ?query WHERE { 
-   ?s <meta:competencyQuery> ?query . 
-} 
-# What queries should be run to validate the ontology?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateCreated> "2014-04-16")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "* What metadata information is available for the ontology?
 * What is the meaning/semantic of each of the metadata properties?
@@ -61,7 +62,8 @@ NOTE: When querying or hand-editing this ontology (or one that imports this onto
 
 Issues with the ontology may be entered and tracked at http://github.com/NinePts/reusable-ontologies/."@en)
 Annotation(rdfs:seeAlso "http://purl.org/ninepts/metadata/metadata-properties.ofn"^^xsd:anyURI)
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified> "2014-04-28")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified> "2014-05-01")
+Annotation(<http://www.w3.org/2004/02/skos/core#editorialNote> "All of the competencyQueries need to be tested"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#mimeType> "text/owl-functional")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "metadata"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#copyright> "Copyright (c) 2014 Nine Points Solutions, LLC"@en)
@@ -137,6 +139,7 @@ SELECT ?metadata, ?description WHERE {
    ?metadata <dc:description> ?description . 
 } 
 # What is the meaning/semantic of each of the metadata properties?")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX dc: <http://purl.org/dc/elements/1.1/> 
@@ -150,16 +153,16 @@ SELECT ?metadata WHERE {
    ) 
 } 
 # What metadata properties in the ontology have no description?")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en)
 Annotation(<http://purl.org/dc/elements/1.1/description> "Ontology providing a small, basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties."@en)
-Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "28 April 2014
-* Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
-** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
-* Removed the definition property (since description can be used), the coverage properties (since their semantics are not precise and keywords are available), and the usageNote property (since scopeNote could be used instead)
-* Completed the metadata details of the remaining properties
-* Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
-* Renamed the property, replaces, to replacementFor
-* Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"@en)
+Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "01 May 2014
+* Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)"@en)
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
+SELECT ?query WHERE { 
+   ?s <meta:competencyQuery> ?query . 
+} 
+# What queries should be run to validate the ontology?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 SELECT ?metadata WHERE { 
@@ -287,17 +290,14 @@ SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#c
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "competency query"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "competency queries"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "SELECT * WHERE {?s ?p ?o}"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "Competency questions and corresponding queries are defined for ontologies, and are not associated with classes, properties or individuals.
 
 Each query should be specified in individual competencyQuery triples."@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "SELECT * WHERE {?s ?p ?o}"@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "A translation of a competency question to SPARQL.  The query can be run to validate an ontology."@en)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "competency questions"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "competency questions"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "Competency questions are defined for ontologies, and are not associated with classes, properties or individuals.
-
-Whereas the query corresponding to each question is defined in different competencyQuery triples, there should be only one triple defined with the competencyQuestions predicate."@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "The following competency questions are taken from the Ontology Development 101 web page  (http://protege.stanford.edu/publications/ontology_development/ontology101-noy-mcguinness.html), \"Step 1. Determine the domain and scope of the ontology\" for a food and wine ontology:
 * Which wine characteristics should I consider when choosing a wine?
 * Is Bordeaux a red or white wine?
@@ -305,6 +305,9 @@ AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.o
 * What is the best choice of wine for grilled meat?
 * Does a bouquet or body of a specific wine change with vintage year?
 * What were good vintages for Napa Zinfandel?"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "Competency questions are defined for ontologies, and are not associated with classes, properties or individuals.
+
+Whereas the query corresponding to each question is defined in different competencyQuery triples, there should be only one triple defined with the competencyQuestions predicate."@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "Competency questions (per the 1995 paper by Gruninger and Fox) are \"requirements that are in the form of questions that [the] ontology must be able to answer.\"  The questions can be translated to queries and help to define the scope of the ontology."@en)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#copyright>))
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#copyright> "The copyright statement for an ontology.  Per WordNet, copyright is \"the exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same.\""@en)
@@ -351,8 +354,8 @@ If a set of modification dates is not valuable, but only knowing the date of the
 
 In Dublin Core, values of the modified date property use the format defined by the W3CDTF profile of ISO 8601.  However, that format is not a valid date/time datatype in OWL 2.  The Dublin Core date/time modified information would have to be converted to the OWL format, or imported as an OWL literal.  For this reason, the Dublin Core property is mapped as a \"close\" and not an \"exact\" match."@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#dateModified> "2014-04-16T17:12:00"^^xsd:dateTime)
-AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#dateModified> "http://purl.org/dc/elements/1.1/date"^^xsd:anyURI)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#dateModified> "2014-04-16")
+AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#dateModified> "http://purl.org/dc/elements/1.1/date"^^xsd:anyURI)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#dateModified> <http://purl.org/dc/elements/1.1/date>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch>))
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)

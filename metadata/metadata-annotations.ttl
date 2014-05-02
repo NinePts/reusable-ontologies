@@ -10,6 +10,8 @@
                                                         
                                                         :license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
                                                         
+                                                        :anotherFormatOf "http://purl.org/ninepts/metadata/metadata-annotations.ofn"^^xsd:anyURI ;
+                                                        
                                                         rdfs:seeAlso "http://purl.org/ninepts/metadata/metadata-properties.ttl"^^xsd:anyURI ;
                                                         
                                                         :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
@@ -19,6 +21,9 @@ SELECT ?s, ?work WHERE {
    ?s <skos:editorialNote> ?work . 
 } 
 # What work remains to be done on the ontology, and what decisions still need to be made?""" ;
+                                                        
+                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """01 May 2014
+* Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)"""@en ;
                                                         
                                                         :dateCreated "2014-04-16" ;
                                                         
@@ -30,6 +35,8 @@ SELECT ?s, ?work WHERE {
 * Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
 * Renamed the property, replaces, to replacementFor
 * Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"""@en ;
+                                                        
+                                                        :keyword "Dublin Core"@en ;
                                                         
                                                         <http://www.w3.org/2004/02/skos/core#prefLabel> "Metadata Ontology (Using Annotation Properties)"@en ;
                                                         
@@ -55,6 +62,8 @@ SELECT ?metadata WHERE {
    ) 
 } 
 # What metadata properties in the ontology have no example?""" ;
+                                                        
+                                                        :dateLastModified "2014-05-01" ;
                                                         
                                                         <http://www.w3.org/2004/02/skos/core#scopeNote> """It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
@@ -91,8 +100,6 @@ SELECT ?metadata WHERE {
                                                         
                                                         :mimeType "text/turtle" ;
                                                         
-                                                        :dateLastModified "2014-04-28" ;
-                                                        
                                                         :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
@@ -109,17 +116,16 @@ SELECT ?metadata, ?mapping, ?stdConcept WHERE {
 } 
 # How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?""" ;
                                                         
-                                                        :competencyQuestions """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+                                                        <http://www.w3.org/2004/02/skos/core#editorialNote> "All of the competencyQueries need to be tested"@en ;
+                                                        
+                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
 SELECT ?query WHERE { 
    ?s <meta:competencyQuery> ?query . 
 } 
-# What queries should be run to validate the ontology?""" ;
-                                                        
-                                                        :keyword "Dublin Core"@en ;
-                                                        
-                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+# What queries should be run to validate the ontology?""" ,
+                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
 SELECT ?metadata, ?example WHERE { 
@@ -220,7 +226,7 @@ Note that the ontology referenced using the seeAlso property (http://purl.org/ni
                                                         
                                                         :keyword "metadata"@en ;
                                                         
-                                                        owl:versionIRI <http://purl.org/ninepts/metadata/metadata-annotations/0.2.0> .
+                                                        owl:versionIRI <http://purl.org/ninepts/metadata/metadata-annotations/0.5.0> .
 
 
 #################################################################
