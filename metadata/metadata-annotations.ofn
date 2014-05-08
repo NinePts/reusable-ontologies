@@ -6,7 +6,20 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
 Ontology(<http://purl.org/ninepts/metadata/metadata-annotations>
-<http://purl.org/ninepts/metadata/metadata-annotations/0.5.0>
+<http://purl.org/ninepts/metadata/metadata-annotations/0.6.0>
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+SELECT ?metadata WHERE { 
+    ?metadata rdf:type owl:AnnotationProperty . 
+   OPTIONAL {
+      ?metadata dc:description ?description . 
+   } . 
+   FILTER ( 
+      !bound(?description) 
+   ) 
+}
+# What metadata properties in the ontology have no description?")
 Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "28 April 2014
 * Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
 ** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
@@ -15,36 +28,20 @@ Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "28 April 2014
 * Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
 * Renamed the property, replaces, to replacementFor
 * Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"@en)
+Annotation(<http://purl.org/dc/elements/1.1/creator> "Andrea Westerinen
+Nine Points Solutions, LLC")
+Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "07 May 2014
+* Description property for moreSpecificThan should have been an example property
+* Updated examples for the relation properties
+* Updated all the competencyQueries (correcting the syntax)"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata WHERE { 
-    ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   OPTIONAL {
-      ?metadata <skos:example> ?example . 
-   } . 
-   FILTER ( 
-      !bound(?example) 
-   ) 
-} 
-# What metadata properties in the ontology have no example?")
-Annotation(<http://purl.org/dc/elements/1.1/creator> "Andrea Westerinen
-Nine Points Solutions, LLC")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata ?mapping ?stdConcept . 
-   FILTER ( 
-      regex(str(?mapping), \"closeMatch\") || regex(str(?mapping), \"exactMatch\") || 
-      regex(str(?mapping), \"inspiredBy”) || regex(str(?mapping), \"moreGeneralThan”) ||  
-      regex(str(?mapping), \"moreSpecificThan”) 
-   ) . 
-   FILTER ( 
-      regex(str(? stdConcept), \"skos/core”) || regex(str(? stdConcept), \"dc/elements”) 
-   ) 
-} 
-# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?")
+SELECT ?metadata ?example WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata skos:example ?example . 
+}
+# What is an example of the use of each of the metadata properties?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateCreated> "2014-04-16")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> "* What metadata information is available for the ontology?
 * What is the meaning/semantic of each of the metadata properties?
@@ -56,45 +53,69 @@ Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQues
 * What queries should be run to validate the ontology?
 * What metadata properties have no description or no example?"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#license> "http://opensource.org/licenses/MIT"^^xsd:anyURI)
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+SELECT ?metadata ?description WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata dc:description ?description . 
+}
+# What is the meaning/semantic of each of the metadata properties?")
 Annotation(<http://www.w3.org/2004/02/skos/core#scopeNote> "This ontology is intended to be usable/imported to any ontology to provide basic metadata for provenance and reuse. It is designed to be independent of any specific domain.
 
 NOTE: When querying or hand-editing this ontology (or one that imports this ontology), take care to use the correct namespace for the properties.  The base URI is http://purl.org/ninepts/metadata/metadata-annotations#.  The namespaces, http://purl.org/dc/elements/1.1/ and http://www.w3.org/2004/02/skos/core#, are also used.
 
 Issues with the ontology may be entered and tracked at http://github.com/NinePts/reusable-ontologies/."@en)
 Annotation(rdfs:seeAlso "http://purl.org/ninepts/metadata/metadata-properties.ofn"^^xsd:anyURI)
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified> "2014-05-01")
-Annotation(<http://www.w3.org/2004/02/skos/core#editorialNote> "All of the competencyQueries need to be tested"@en)
+Annotation(owl:priorVersion "0.5.0")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#mimeType> "text/owl-functional")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "metadata"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#copyright> "Copyright (c) 2014 Nine Points Solutions, LLC"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?s, ?change WHERE { 
-   ?s <skos:changeNote> ?change . 
-} 
-# How has the ontology evolved? What changes have been documented in the ontology?")
-Annotation(owl:priorVersion "0.1.0")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "SELECT ?p, ?o WHERE { 
-   <http://purl.org/ninepts/metadata/metadata-annotations> ?p ?o . 
-} 
-# What metadata information is available for the ontology?")
+SELECT ?metadata WHERE { 
+    ?metadata rdf:type owl:AnnotationProperty . 
+   OPTIONAL {
+      ?metadata skos:example ?example . 
+   } . 
+   FILTER ( 
+      !bound(?example) 
+   ) 
+}
+# What metadata properties in the ontology have no example?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?s, ?work WHERE { 
-   ?s <skos:editorialNote> ?work . 
-} 
-# What work remains to be done on the ontology, and what decisions still need to be made?")
+PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
+SELECT ?query WHERE { 
+   ?s meta:competencyQuery ?query . 
+}
+# What queries should be run to validate the ontology?")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+SELECT ?metadata WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   FILTER ( 
+      regex(str(?metadata), \"skos/core\") || regex(str(?metadata), \"dc/elements\") 
+   ) 
+}
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?")
 Annotation(<http://www.w3.org/2004/02/skos/core#prefLabel> "Metadata Ontology (Using Annotation Properties)"@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata, ?scope WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <skos:scopeNote> ?scope . 
-} 
-# Are there any restrictions or suggestions for the use of the various metadata properties?")
+SELECT ?metadata ?mapping ?stdConcept WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata ?mapping ?stdConcept . 
+   FILTER ( 
+      regex(str(?mapping), \"closeMatch\") || regex(str(?mapping), \"exactMatch\") || 
+      regex(str(?mapping), \"inspiredBy\") || regex(str(?mapping), \"moreGeneralThan\") ||  
+      regex(str(?mapping), \"moreSpecificThan\") 
+   ) . 
+   FILTER ( 
+      regex(str(?stdConcept), \"skos/core\") || regex(str(?stdConcept), \"dc/elements\") 
+   ) 
+}
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "SKOS"@en)
 Annotation(<http://purl.org/dc/elements/1.1/language> "en-US")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#license> "The MIT License (MIT)
@@ -121,11 +142,12 @@ THE SOFTWARE."@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata, ?example WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <skos:example> ?example . 
-} 
-# What is an example of the use of each of the metadata properties?")
+SELECT ?metadata ?scope WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata skos:scopeNote ?scope . 
+}
+# Are there any restrictions or suggestions for the use of the various metadata properties?")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified> "2014-05-07")
 Annotation(rdfs:comment "This ontology is a consolidation of basic metadata concepts from the Dublin Core Element and Terms vocabularies, and the SKOS data model.  The semantics are captured as annotation properties.  
 
 Where the concepts are widely deployed from Dublin Core and SKOS, the property names use the full URIs from those sources.  For example, the property name of \"description\" is the Dublin Core URI, http://purl.org/dc/elements/1.1/description, and does not use this ontology's namespace.  This allows tooling that \"understands\" the standard terms (like description or SKOS' prefLabel) to immediately recognize (and appropriately present) the concepts.
@@ -133,45 +155,26 @@ Where the concepts are widely deployed from Dublin Core and SKOS, the property n
 Note that the ontology referenced using the seeAlso property (http://purl.org/ninepts/metadata/metadata-properties.ofn) defines several of the  annotation properties as data and object properties.  This allows (for example) validating  dateTime values and referencing objects/individuals in relations (as opposed to using literal values). "@en)
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-SELECT ?metadata, ?description WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <dc:description> ?description . 
-} 
-# What is the meaning/semantic of each of the metadata properties?")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en)
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?s ?change WHERE { 
+   ?s skos:changeNote ?change . 
+}
+# How has the ontology evolved? What changes have been documented in the ontology?")
 Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-SELECT ?metadata WHERE { 
-    ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   OPTIONAL {
-      ?metadata <dc:description> ?description . 
-   } . 
-   FILTER ( 
-      !bound(?description) 
-   ) 
-} 
-# What metadata properties in the ontology have no description?")
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?s ?work WHERE { 
+   ?s skos:editorialNote ?work . 
+}
+# What work remains to be done on the ontology, and what decisions still need to be made?")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en)
 Annotation(<http://purl.org/dc/elements/1.1/description> "Ontology providing a small, basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties."@en)
 Annotation(<http://www.w3.org/2004/02/skos/core#changeNote> "01 May 2014
 * Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)"@en)
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
-SELECT ?query WHERE { 
-   ?s <meta:competencyQuery> ?query . 
-} 
-# What queries should be run to validate the ontology?")
-Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-SELECT ?metadata WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   FILTER ( 
-      regex(str(?metadata), \"skos/core\") || regex(str(?metadata), \"dc/elements\") 
-   ) 
-} 
-# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?")
+Annotation(<http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> "SELECT ?p ?o WHERE { 
+   <http://purl.org/ninepts/metadata/metadata-annotations> ?p ?o . 
+}
+# What metadata information is available for the ontology?")
 Annotation(<http://www.w3.org/2004/02/skos/core#scopeNote> "It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
 Also note that where the concepts overlap in Dublin Core and SKOS, only one annotation property is created.  (But the mappingRelation properties will indicate both mappings.) An example of this is the correspondence between Dublin Core's title and SKOS' prefLabel.
@@ -242,8 +245,8 @@ Language values must follow the syntax defined in IETF RFC 4646.  The RFC is ava
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> <http://purl.org/dc/elements/1.1/language> "languages"@en)
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/relation>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/dc/elements/1.1/relation> "Use of this property is not recommended.  Instead, use of one of its subproperties is recommended since those properties define explicit semantics and format."@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/dc/elements/1.1/relation> "http://namespace_info/some_entity - relation - http://namespace_info/some_related_entity"@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/dc/elements/1.1/relation> "A reference to a related entity."@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/dc/elements/1.1/relation> "text_includingURI_defining_someRelatedEntity"@en)
 AnnotationAssertion(rdfs:comment <http://purl.org/dc/elements/1.1/relation> "Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/dc/elements/1.1/relation> "ISBN reference"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/dc/elements/1.1/relation> "relation"@en)
@@ -251,10 +254,10 @@ AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefL
 Declaration(AnnotationProperty(<http://purl.org/dc/elements/1.1/rights>))
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> <http://purl.org/dc/elements/1.1/rights> "rights"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/dc/elements/1.1/rights> "rights"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/dc/elements/1.1/rights> "Digital rights, licensing, copyright details as text"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/dc/elements/1.1/rights> "It is assumed that the rights property (and its sub-properties) only apply at the ontology level.
 
 Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different rights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different rights be placed in different ontologies and different ontology files."@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/dc/elements/1.1/rights> "MIT License (license details)"@en)
 AnnotationAssertion(rdfs:comment <http://purl.org/dc/elements/1.1/rights> "Typically, rights information includes a statement about various property rights associated with the ontology, including intellectual property rights."@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/dc/elements/1.1/rights> "Information about the entitlements held in and over the ontology."@en)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#altLabel_Plural>))
@@ -270,18 +273,22 @@ Note that the plural form of an altLabel can be specified simply as an altLabel.
 Since relationships between annotation property values cannot be defined, it is not possible to define the correspondence between the singular and plural forms of a label."@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#altLabel_Plural> "alternative label (plural)"@en)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#altLabel_Plural> rdfs:label)
-Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf>))
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "another format of"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "http://some_namespace/ontology.rdf - anotherFormatOf - http://some_namespace/ontology.ofn (the ontology serialized using RDF/XML is anotherFormatOf the ontology serialized using OWL Functional Syntax)"@en)
-AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "References an ontology, class, property or individual that is substantially the same as the subject of this relation, but in another format."@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "Note that this relationship can be interpreted as symmetric and transitive."@en)
-AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "http://purl.org/dc/terms/hasFormat"^^xsd:anyURI)
-AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "http://some_namespace/ontology-es.ofn - anotherFormatOf - http://some_namespace/ontology.ofn (a version of the ontology, rendered using Spanish as the native language, is \"anotherFormatOf\" the original ontology)"@en)
-SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> <http://purl.org/dc/elements/1.1/relation>)
+Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat>))
+AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "http://purl.org/dc/terms/hasFormat"^^xsd:anyURI)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "another format"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "More specific example:
+http://some_namespace/ontology.rdf (defined for an ontology serialized in Turtle, referencing the ontology serialized using RDF/XML)"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "More specific example:
+http://some_namespace/ontology-es.ofn (defined for an ontology written in English for a version of an ontology rendered using Spanish as the native language)"@en)
+AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "other formats"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "text_includingURI_defining_someExample"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "Note that this relationship can be interpreted as transitive."@en)
+AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
+AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "References an ontology, class, property or individual that is substantially the same as the subject of this relation, but in another format."@en)
+SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> <http://purl.org/dc/elements/1.1/relation>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#closeMatch>))
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "text_includingURI_defining_someSimilarEntity"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "close match"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "http://some_namespace/some_entity - closeMatch - http://some_other_namespace/some_similar_entity"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "http://www.w3.org/2004/02/skos/core#closeMatch"^^xsd:anyURI)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "Note that this relationship is NOT considered to be transitive."@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
@@ -361,16 +368,16 @@ Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annota
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "exact match"@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "References a semantically similar ontology, class, property or individual.  ExactMatch indicates that the two entities have equivalent semantics, and can be used interchangeably.  By definition, this is a transitive relationship."@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "http://some_namespace/some_entity - exactMatch - http://some_other_namespace/some_other_entity"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "Note that this relation is considered to be transitive."@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "text_includingURI_defining_someEquivalentEntity"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> "http://www.w3.org/2004/02/skos/core#exactMatch"^^xsd:anyURI)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#closeMatch>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy>))
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "References some entity which inspired the definition of the subject of the relationship.  The referenced entity could be of similar scope and definition (for example, a class in one ontology inspiring the definition of class or property in another ontology), or completely different (for example, Aristotle's classifications providing the basis for an \"upper\" ontology)."@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://some_namespace/some_entity - inspiredBy - http://some_other_namespace/some_other_entity"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "text_includingURI_defining_someSource"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "inspired by"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://some_namespace/ontology.rdf - inspiredBy - ISBN reference (to publication containing basic concepts)"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "ISBN reference (to publication containing basic concepts)"@en)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#keyword>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "a_keyword_for_the_entity"@en)
@@ -400,7 +407,7 @@ AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefL
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "It is recommended that one of the sub-properties of mappingRelation be used to describe the specific semantics of the mapping.  This property is too general (under-specified) to be useful."@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "http://www.w3.org/2004/02/skos/core#mappingRelation"^^xsd:anyURI)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "mapping relation"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "http://some_namespace/some_entity - mappingRelation - http://some_other_namespace/some_other_entity"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "text_includingURI_defining_someMappedEntity"@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> "References an ontology, class, property or individual which can be mapped to the subject of the relationship."@en)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation> <http://purl.org/dc/elements/1.1/relation>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#mimeType>))
@@ -427,8 +434,8 @@ http://www.iana.org/assignments/media-types/media-types.xhtml."@en)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "more general than"@en)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "References some entity that is a more specific concept than the subject of the relationship (i.e., the subject would be considered to be a super-type/super-property of the object)."@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "text_includingURI_defining_someMoreSpecificEntity"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "http://some_namespace/some_entity - moreGeneralThan - http://some_namespace/some_more_specific_entity"@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> "Typically, moreGeneralThan is used to relate class and property concepts, and not ontologies or individuals.  The relationship is particularly useful when merging/mapping ontologies, vocabularies, etc., in order to place the concepts in a subsumption hierarchy.
 
 Note that this relation can be considered to be transitive.  That is why it is only defined as a \"closeMatch\" to the SKOS concepts of narrowMatch and narrower.  (In the SKOS model, these two relations are not guaranteed to be transitive.)"@en)
@@ -437,13 +444,13 @@ AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#close
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan>))
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "more specific than"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "text_includingURI_defining_someMoreGeneralEntity"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "http://www.w3.org/2004/02/skos/core#broadMatch"^^xsd:anyURI)
 AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "References some entity that is a more general concept than the subject of the relationship (i.e., the subject would be considered to be a sub-type/sub-property of the object)."@en)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "Typically, moreSpecificThan is used to relate class and property concepts, and not ontologies or individuals.  The relationship is particularly useful when merging/mapping ontologies, vocabularies, etc., in order to place the concepts in a subsumption hierarchy.
 
 Note that this relation can be considered to be transitive.  That is why it is only defined as a \"closeMatch\" to the SKOS concepts of broadMatch and broader.  (In the SKOS model, these two relations are not guaranteed to be transitive.)"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#closeMatch> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "http://www.w3.org/2004/02/skos/core#broader"^^xsd:anyURI)
-AnnotationAssertion(<http://purl.org/dc/elements/1.1/description> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "http://some_namespace/some_entity - moreSpecificThan - http://some_namespace/some_more_general_entity"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> <http://purl.org/ninepts/metadata/metadata-annotations#mappingRelation>)
 Declaration(AnnotationProperty(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural>))
@@ -463,8 +470,9 @@ AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#scopeNote> <http://purl
 
 Note that the relation can be interpreted as transitive."@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#exactMatch> <http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> "http://purl.org/dc/terms/replaces"^^xsd:anyURI)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> "http://some_namespace/some_entity - replacementFor -  http://some_namespace/some_deprecated_entity"@en)
-AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> "http://some_namespace/ontology_v2.ofn - replacementFor - http://some_namespace/ontology_v1.ofn"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> "text_includingURI_defining_someDeprecatedOrOlderEntity"@en)
+AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#example> <http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> "More specific example:
+http://some_namespace/ontology_v1.ofn (defined for v2 of an ontology, referencing a version which it replaces)"@en)
 SubAnnotationPropertyOf(<http://purl.org/ninepts/metadata/metadata-annotations#replacementFor> <http://purl.org/dc/elements/1.1/relation>)
 AnnotationAssertion(<http://www.w3.org/2004/02/skos/core#prefLabel> rdfs:comment "comment"@en)
 AnnotationAssertion(<http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> rdfs:comment "comments"@en)

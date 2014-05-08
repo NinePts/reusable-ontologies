@@ -10,17 +10,115 @@
                                                        
                                                        <http://purl.org/ninepts/metadata/metadata-annotations#license> "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf> "http://purl.org/ninepts/metadata/metadata-properties.ofn"^^xsd:anyURI ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat> "http://purl.org/ninepts/metadata/metadata-properties.ofn"^^xsd:anyURI ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> """* What metadata information is available as data or object properties from this ontology?  And, what are the definitions/descriptions of those properties?
-* What examples are available of the use of each of the concepts in this ontology?
-* How do the metadata properties correspond to the annotation properties?"""@en ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?date WHERE {     
+    { 
+        ?individual meta-props:dateModified ?date . 
+    } 
+    UNION {
+        ?individual meta-props:dateLastModified ?date . 
+    } 
+    UNION {
+        ?individual meta-props:hasModification ?modification . 
+        {
+            {
+                ?modification meta-props:dateCreated ?date . 
+             }
+             UNION {
+                ?modification meta-props:dateModified ?date . 
+             }
+             UNION {
+                ?modification meta-props:dateLastModified ?date . 
+             }
+        }  
+    } 
+}
+# List the dates of any modifications to an individual.""" ,
+                                                                                                                               """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?date WHERE { 
+    ?individual meta-props:dateCreated ?date . 
+}
+# List the date of creation for an individual.""" ,
+                                                                                                                               """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?mappedIndividual WHERE {
+    ?individual meta-props:correspondsTo ?mappedIndividual . 
+}
+# Describe how one individual can be mapped/corresponds to another.""" ;
+                                                       
+                                                       owl:priorVersion "0.1.0" ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?contributor ?updatedIndividual WHERE { 
+    { 
+        ?contributor meta-props:contributedTo ?updatedIndividual . 
+    } 
+    UNION { 
+        ?contributor meta-props:contributedTo ?modification . 
+        ?updatedIndividual meta-props:hasModification ?modification . 
+    } 
+}
+# Find all individuals who created or contributed to something (such as a book or trouble ticket)?""" ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified> "2014-05-07" ;
                                                        
                                                        <http://purl.org/ninepts/metadata/metadata-annotations#copyright> "Copyright (c) 2014 Nine Points Solutions, LLC"@en ;
                                                        
-                                                       <http://www.w3.org/2004/02/skos/core#prefLabel> "Metadata Ontology (Using Annotation, Data and Object Properties)"@en ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?identifier WHERE {
+    ?individual meta-props:identifier ?identifier . 
+}
+# If an individual has an identifier, display it.""" ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "SKOS"@en ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#dateCreated> "2014-05-01" ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?metadata ?type ?example WHERE { 
+    ?metadata skos:example ?example . 
+   FILTER (
+      regex(str(?metadata), \"metadata-properties\") 
+   ) 
+}
+# What examples are available of the use of each of the concepts in this ontology?""" ,
+                                                                                                                               """PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+SELECT ?metadata ?type ?description WHERE { 
+    ?metadata dc:description ?description . 
+    FILTER (
+       regex(str(?metadata), \"metadata-properties\") 
+    ) 
+}
+# What information is available as data or object properties from this ontology?  And, what are the definitions/descriptions of those properties?""" ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#mimeType> "text/turtle" ;
+                                                       
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?change WHERE { 
+   ?individual rdf:type ?type . 
+   { 
+       ?individual skos:changeNote ?change . 
+   } 
+   UNION {
+       ?individual meta-props:hasModification ?modification . 
+       ?modification skos:changeNote ?change . 
+   } .
+   Filter (
+      regex(str(?type), \"NamedIndividual\")
+   )
+}
+# Describe all changes to some individual.""" ,
+                                                                                                                               """PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#> 
+SELECT ?metadata ?annotation WHERE { 
+    ?metadata meta:inspiredBy ?annotation . 
+    FILTER (
+      regex(str(?metadata), \"metadata-properties\") 
+    ) 
+}
+# How do the metadata properties correspond to the annotation properties?""" ;
                                                        
                                                        <http://purl.org/ninepts/metadata/metadata-annotations#license> """The MIT License (MIT)
 
@@ -46,23 +144,45 @@ THE SOFTWARE."""@en ;
                                                        
                                                        <http://purl.org/dc/elements/1.1/language> "en-US" ;
                                                        
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuery> """PREFIX meta-props: <http://purl.org/ninepts/metadata/metadata-properties#> 
+SELECT ?individual ?differentIndividual WHERE {
+    { 
+       ?individual meta-props:reorganizedAs ?differentIndividual . 
+    }
+    UNION {
+       ?individual meta-props:translatedTo ?differentIndividual . 
+    } 
+}
+# If an individual has been reorganized/reformatted or translated, list the resulting entities.""" ;
+                                                       
                                                        <http://purl.org/dc/elements/1.1/creator> """Andrea Westerinen
 Nine Points Solutions, LLC""" ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#dateCreated> "2014-05-01" ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#competencyQuestions> """* What information is available as data or object properties from this ontology?  And, what are the definitions/descriptions of those properties?
+* What examples are available of the use of each of the concepts in this ontology?
+* How do the metadata properties correspond to the annotation properties?
+* Find all individuals who created or contributed to some individual (such as a book or trouble ticket)?
+* List the date of creation for an individual.  List the dates of any modifications to an individual.
+* Describe all changes to some individual.
+* Describe how one individual can be mapped/corresponds to another.
+* If an individual has an identifier, display it.
+* If an individual has been reorganized/reformatted or translated, list the resulting entities."""@en ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "Dublin Core"@en ;
-                                                       
-                                                       <http://www.w3.org/2004/02/skos/core#editorialNote> "Need to add the annotations for the data and object properties"@en ,
-                                                                                                           "Need to define and test the competencyQueries"@en ;
-                                                       
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#mimeType> "text/turtle" ;
+                                                       <http://www.w3.org/2004/02/skos/core#changeNote> """07 May 2014
+* Renamed isAnotherFormatOf to hasAnotherFormat
+* Removed MappingDetails and its properties since a separate ontology/more complete definition is required
+* Removed hasMappingRelation and hasAnotherFormat since their semantics were too general to be useful
+* Removed the irreflexive flag since it was making properties \"non-simple\"
+* Added moreGeneral/SpecificThan, reorganizedAs and translatedTo as new object properties
+* Completed the metadata details for the remaining properties
+* Added competency questions and the competencyQueries"""@en ;
                                                        
                                                        <http://www.w3.org/2004/02/skos/core#scopeNote> """It is important to note that not all concepts are included from the Dublin Core or SKOS sources; and of the concepts that are included, only a few are also mapped to data or object properties.  A list of the omitted concepts is provided in the scopeNote of the imported metadata-annotations ontology.
 
 What follows is a list of the metadata-annotation ontology properties that are NOT also defined as data or object properties in this ontology (and why):
 
  - competencyQuery, competencyQuestions and mimeType - These strings only apply to an ontology, and are not appropriate for individuals.  Hence, they are not defined as data or object properties.
+ - inspiredBy - This is relevant for definitions of classes, properties, etc. but at an individual level, its semantics are not useful. 
  - description, keyword, label, *Label, note and *Note - These properties are simple strings that would not benefit from further refinement as data or object properties.
  - language - This property is related to the language in which an ontology, class, property or individual is expressed.  It is a simple string, based on IETF RFC 4646.  If an enumerated data type is desired (or the values of the property should be based on a different controlled vocabulary or syntax), then a property could be defined in an importing ontology.  That level of specificity is not done in this ontology.
  - rights, copyright and license - These strings are recommended to be applied at an ontology level, to define its rights.  Associating deeper semantics and defining relationships should be handled in a legal ontology, and not as \"simple\" data and object properties.
@@ -71,13 +191,16 @@ It was noted in the description for this ontology that some supporting classes/c
 
 Lastly, it should be noted that the identifier property from Dublin Core IS specified in this metadata-properties ontology, but was not included in the metadata-annotations ontology.  This is because the concept of an identifier is best defined as a functional data property for an individual.  Also, since the Dublin Core property is \"officially\" defined as an annotation property, the namespace of the identifier functional property uses the namespace of this ontology."""@en ;
                                                        
+                                                       <http://www.w3.org/2004/02/skos/core#prefLabel> "Metadata Ontology (Using Annotation, Data and Object Properties)"@en ;
+                                                       
                                                        <http://purl.org/dc/elements/1.1/description> "Ontology providing a small, basic set of metadata concepts, based on Dublin Core and SKOS.  The concepts are defined as annotation properties (in the imported metadata-annotations ontology) and several are then specified as data or object properties.  This ontology includes supporting classes/concepts when required to fully define the object properties."@en ;
                                                        
-                                                       <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "metadata"@en ;
+                                                       <http://purl.org/ninepts/metadata/metadata-annotations#keyword> "SKOS"@en ,
+                                                                                                                       "metadata"@en ;
                                                        
                                                        owl:imports <http://purl.org/ninepts/metadata/metadata-annotations> ;
                                                        
-                                                       owl:versionIRI <http://purl.org/ninepts/metadata/metadata-properties/0.1.0> .
+                                                       owl:versionIRI <http://purl.org/ninepts/metadata/metadata-properties/0.2.0> .
 
 
 #################################################################
@@ -89,8 +212,22 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 ###  http://purl.org/ninepts/metadata/metadata-properties#contributedTo
 
-:contributedTo rdf:type owl:IrreflexiveProperty ,
-                        owl:ObjectProperty ;
+:contributedTo rdf:type owl:ObjectProperty ;
+               
+               <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/dc/elements/1.1/contributor"^^xsd:anyURI ;
+               
+               <http://purl.org/dc/elements/1.1/description> "A relationship between an Actor (the subject) and an individual (the object) to which the Actor has made changes/contributions."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#scopeNote> """Contributors may be tracked directly for an individual (the actor that performed a change may be directly related to the modified instance using the contributedTo object property) or the changes may be described via a reification object, an instance of the Modification class.  
+
+If a Modification instance is used, then the Actor \"contributes to\" the Modification instance, and the Modification instance is related to the individual being changed.
+
+To find all contributors to an individual, one would query for the occurrence of any contributedTo properties - where the entity is the object, and also query for hasModification properties - where the entity is the subject, and then any actors which contributed to those modifications."""@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "contributed to"@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someActor - contributedTo - http://some_namespace/someIndividual"@en ,
+                                                             "http://some_namespace/someActor - contributedTo - http://some_namespace/someModificationIndividual"@en ;
                
                rdfs:domain :Actor .
 
@@ -98,25 +235,35 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 ###  http://purl.org/ninepts/metadata/metadata-properties#correspondsTo
 
-:correspondsTo rdf:type owl:IrreflexiveProperty ,
-                        owl:ObjectProperty ;
+:correspondsTo rdf:type owl:ObjectProperty ,
+                        owl:TransitiveProperty ;
                
-               rdfs:subPropertyOf :hasMappingRelation .
+               <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#closeMatch"^^xsd:anyURI ,
+                                                                                  "http://purl.org/ninepts/metadata/metadata-annotations#exactMatch"^^xsd:anyURI ;
+               
+               <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals indicating that they have the same semantics."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#scopeNote> "An example of the use of this relationship is between two enumerations which use different vocabularies, or different languages."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "corresponds to"@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someIndividual - correspondsTo - http://some_namespace/individualInAnotherVocabulary_orLanguage"@en .
 
 
 
 ###  http://purl.org/ninepts/metadata/metadata-properties#created
 
-:created rdf:type owl:IrreflexiveProperty ,
-                  owl:ObjectProperty ;
+:created rdf:type owl:ObjectProperty ;
+         
+         <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/dc/elements/1.1/creator"^^xsd:anyURI ;
+         
+         <http://purl.org/dc/elements/1.1/description> "A relationship between an Actor (the subject) and something (the object) which the Actor produced/created."@en ;
+         
+         <http://www.w3.org/2004/02/skos/core#prefLabel> "created"@en ;
+         
+         <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someActor - created - http://some_namespace/createdIndividual"@en ;
          
          rdfs:domain :Actor .
-
-
-
-###  http://purl.org/ninepts/metadata/metadata-properties#hasMappingRelation
-
-:hasMappingRelation rdf:type owl:ObjectProperty .
 
 
 
@@ -124,41 +271,103 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 :hasModification rdf:type owl:ObjectProperty ;
                  
+                 <http://purl.org/dc/elements/1.1/description> "A relationship between an individual (the subject) and a Modification instance which collects information about the change(s) made to the individual.  The Modification instance is described using data and object properties which define the date(s) of change, the contributors, changeNote(s), etc."@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "has modification"@en ;
+                 
+                 <http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> "has modifications"@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someModifiedIndividual - hasModification - http://some_namespace/someModificationIndividual"@en ;
+                 
                  rdfs:range :Modification .
 
 
 
-###  http://purl.org/ninepts/metadata/metadata-properties#isAnotherFormatOf
+###  http://purl.org/ninepts/metadata/metadata-properties#moreGeneralThan
 
-:isAnotherFormatOf rdf:type owl:IrreflexiveProperty ,
-                            owl:ObjectProperty .
+:moreGeneralThan rdf:type owl:ObjectProperty ,
+                          owl:TransitiveProperty ;
+                 
+                 <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#moreGeneralThan"^^xsd:anyURI ;
+                 
+                 <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals where the subject represents a more general concept than the object."@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#scopeNote> "An example of the use of this relationship is between two enumerations which use different levels of specificity."@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someIndividual - moreGeneralThan - http://some_namespace/some_moreSpecificIndividual"@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#prefLabel> "more general than"@en .
 
 
 
-###  http://purl.org/ninepts/metadata/metadata-properties#mappedToTarget
+###  http://purl.org/ninepts/metadata/metadata-properties#moreSpecificThan
 
-:mappedToTarget rdf:type owl:ObjectProperty ;
-                
-                rdfs:domain :MappingDetail ;
-                
-                rdfs:subPropertyOf :hasMappingRelation .
+:moreSpecificThan rdf:type owl:ObjectProperty ,
+                           owl:TransitiveProperty ;
+                  
+                  <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan"^^xsd:anyURI ;
+                  
+                  <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals where the subject represents a more specific concept than the object."@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#scopeNote> "An example of the use of this relationship is between two enumerations which use different levels of specificity."@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someIndividual - moreSpecificThan - http://some_namespace/some_moreGeneralIndividual"@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#prefLabel> "more specific than"@en .
 
 
 
-###  http://purl.org/ninepts/metadata/metadata-properties#mappedUsingDetails
+###  http://purl.org/ninepts/metadata/metadata-properties#reorganizedAs
 
-:mappedUsingDetails rdf:type owl:ObjectProperty ;
-                    
-                    rdfs:range :MappingDetail ;
-                    
-                    rdfs:subPropertyOf :hasMappingRelation .
+:reorganizedAs rdf:type owl:ObjectProperty ,
+                        owl:TransitiveProperty ;
+               
+               <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat"^^xsd:anyURI ;
+               
+               <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals where they are substantially the same, but presented, organized, layed out, formatted, ... differently."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#scopeNote> "Note that this relationship is declared as transitive, meaning that a sequence of reorganizations/reformats could be traced for an individual.  It is not declared as symmetric, because each reorganization could introduce errors or expand/restrict concepts."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someIndividual - reorganizedAs - http://some_namespace/reformatted_reorganized_orNewLayoutIndividual"@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "reorganized as"@en .
 
 
 
 ###  http://purl.org/ninepts/metadata/metadata-properties#replaces
 
-:replaces rdf:type owl:IrreflexiveProperty ,
-                   owl:ObjectProperty .
+:replaces rdf:type owl:ObjectProperty ,
+                   owl:TransitiveProperty ;
+          
+          <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#replacementFor"^^xsd:anyURI ;
+          
+          <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals indicating that the object is supplanted, displaced or superceded by the subject."@en ;
+          
+          <http://www.w3.org/2004/02/skos/core#scopeNote> "Note that this relationship is declared as transitive, meaning that a sequence of replacements could be traced for an individual."@en ;
+          
+          <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/newer_evolvedIndividual - replaces - http://some_namespace/older_orOriginalIndividual"@en ;
+          
+          <http://www.w3.org/2004/02/skos/core#prefLabel> "replaces"@en .
+
+
+
+###  http://purl.org/ninepts/metadata/metadata-properties#translatedTo
+
+:translatedTo rdf:type owl:ObjectProperty ,
+                       owl:TransitiveProperty ;
+              
+              <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat"^^xsd:anyURI ;
+              
+              <http://purl.org/dc/elements/1.1/description> "A relationship between two individuals where they are substantially the same, but in different languages."@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#example> """More specific example:
+http://some_namespace/someDocument - translatedTo http://some_namespace/document_inSpanish"""@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#scopeNote> "Note that this relationship is declared as transitive, meaning that a sequence of translations could be traced for an individual.  It is not declared as symmetric, because each translation could introduce errors or expand/restrict concepts."@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/someIndividual - translatedTo - http://some_namespace/someIndividual_inAnotherLanguage"@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "translated to"@en .
 
 
 
@@ -175,6 +384,24 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 :date rdf:type owl:DatatypeProperty ;
       
+      <http://www.w3.org/2004/02/skos/core#example> "2014-05-07T18:37:42"^^xsd:dateTime ;
+      
+      <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/dc/elements/1.1/date"^^xsd:anyURI ;
+      
+      <http://www.w3.org/2004/02/skos/core#example> "2014-01-01T12:12:00-5:00 (Jan 1 2014, 12:12 PM, Eastern Standard Time)"@en ;
+      
+      <http://purl.org/dc/elements/1.1/description> "A point in time associated with an individual."@en ;
+      
+      <http://www.w3.org/2004/02/skos/core#scopeNote> """Use of this property is not recommended.  Instead, use one of its subproperties since they define explicit semantics.
+
+Note that OWL only includes the dateTime and dateTimeStamp XSD datatypes.  DateTime is chosen as the datatype for this property, since a time zone is optional for that datatype.  
+
+To only specify a date, it is recommended that the hh:mm:ss values for the property be set to 00:00:00."""@en ;
+      
+      <http://www.w3.org/2004/02/skos/core#prefLabel> "date"@en ;
+      
+      <http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> "dates"@en ;
+      
       rdfs:range xsd:dateTime .
 
 
@@ -183,6 +410,22 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 :dateCreated rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
+             
+             <http://www.w3.org/2004/02/skos/core#example> "2014-05-07T18:37:42"^^xsd:dateTime ;
+             
+             <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#dateCreated"^^xsd:anyURI ;
+             
+             <http://www.w3.org/2004/02/skos/core#example> "2014-01-01T12:12:00-5:00 (Jan 1 2014, 12:12 PM, Eastern Standard Time)"@en ;
+             
+             <http://purl.org/dc/elements/1.1/description> "A point in time defining when an individual was created/produced."@en ;
+             
+             <http://www.w3.org/2004/02/skos/core#prefLabel> "date created"@en ;
+             
+             <http://www.w3.org/2004/02/skos/core#scopeNote> """dateCreated is a functional property, so only 1 value should be defined for an individual.
+
+Note that OWL only includes the dateTime and dateTimeStamp XSD datatypes.  DateTime is chosen as the datatype for this property, since a time zone is optional for that datatype.  
+
+To only specify a date, it is recommended that the hh:mm:ss values for the property be set to 00:00:00."""@en ;
              
              rdfs:subPropertyOf :date ;
              
@@ -195,6 +438,19 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 :dateLastModified rdf:type owl:DatatypeProperty ,
                            owl:FunctionalProperty ;
                   
+                  <http://www.w3.org/2004/02/skos/core#example> "2014-05-07T18:37:42"^^xsd:dateTime ,
+                                                                "2014-01-01T12:12:00-5:00 (Jan 1 2014, 12:12 PM, Eastern Standard Time)"@en ;
+                  
+                  <http://purl.org/dc/elements/1.1/description> "A point in time when the individual was last changed/updated."@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#prefLabel> "date last modified"@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#scopeNote> """dateLastModified is a functional property, so only 1 value should be defined for an individual.
+
+Note that OWL only includes the dateTime and dateTimeStamp XSD datatypes.  DateTime is chosen as the datatype for this property, since a time zone is optional for that datatype.  
+
+To only specify a date, it is recommended that the hh:mm:ss values for the property be set to 00:00:00"""@en ;
+                  
                   rdfs:subPropertyOf :dateModified ;
                   
                   rdfs:range xsd:dateTime .
@@ -204,6 +460,23 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 ###  http://purl.org/ninepts/metadata/metadata-properties#dateModified
 
 :dateModified rdf:type owl:DatatypeProperty ;
+              
+              <http://www.w3.org/2004/02/skos/core#example> "2014-05-07T18:37:42"^^xsd:dateTime ;
+              
+              <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/ninepts/metadata/metadata-annotations#dateLastModified"^^xsd:anyURI ,
+                                                                                 "http://purl.org/ninepts/metadata/metadata-annotations#dateModified"^^xsd:anyURI ;
+              
+              <http://www.w3.org/2004/02/skos/core#example> "2014-01-01T12:12:00-5:00 (Jan 1 2014, 12:12 PM, Eastern Standard Time)"@en ;
+              
+              <http://purl.org/dc/elements/1.1/description> "A point in time when the individual was changed/updated."@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#scopeNote> """Note that OWL only includes the dateTime and dateTimeStamp XSD datatypes.  DateTime is chosen as the datatype for this property, since a time zone is optional for that datatype.  
+
+To only specify a date, it is recommended that the hh:mm:ss values for the property be set to 00:00:00"""@en ;
+              
+              <http://www.w3.org/2004/02/skos/core#prefLabel> "date modified"@en ;
+              
+              <http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> "dates modified"@en ;
               
               rdfs:subPropertyOf :date ;
               
@@ -216,15 +489,18 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 :identifier rdf:type owl:DatatypeProperty ,
                      owl:FunctionalProperty ;
             
-            <http://purl.org/ninepts/metadata/metadata-annotations#moreSpecificThan> "http://purl.org/dc/elements/1.1/identifier"^^xsd:anyURI ;
+            <http://purl.org/ninepts/metadata/metadata-annotations#inspiredBy> "http://purl.org/dc/elements/1.1/identifier"^^xsd:anyURI ;
             
             <http://purl.org/dc/elements/1.1/description> "A unique, unambiguous reference to an individual."@en ;
             
-            <http://www.w3.org/2004/02/skos/core#scopeNote> "This property is intended to operate as a GUID.  If a preferred or alternative name (which varies by language or context) is being defined, use the prefLabel or altLabel annotation properties instead."@en ;
+            <http://www.w3.org/2004/02/skos/core#scopeNote> """This property is intended to operate as a globally unique ID.  For this reason, it is defined as a functional property.
+
+If a preferred or alternative name (which varies by language or context) is being defined, use the prefLabel or altLabel annotation properties instead."""@en ;
             
-            <http://www.w3.org/2004/02/skos/core#example> "a_functional_globally_unique_identifier"@en ;
+            <http://www.w3.org/2004/02/skos/core#prefLabel> "identifier"@en ;
             
-            <http://www.w3.org/2004/02/skos/core#prefLabel> "identifier"@en .
+            <http://www.w3.org/2004/02/skos/core#example> "some_GUID"@en ,
+                                                          "some_URI"@en .
 
 
 
@@ -259,33 +535,11 @@ Lastly, it should be noted that the identifier property from Dublin Core IS spec
 
 
 
-###  http://purl.org/ninepts/metadata/metadata-properties#MappingDetail
-
-:MappingDetail rdf:type owl:Class ;
-               
-               <http://purl.org/dc/elements/1.1/description> "A class defining how a mapping of one individual to another is accomplished when a transformation or calculation must be performed.  The object property, mappedToTarget, defines the entity which is mapped TO.  Other information and properties, such as the mapping rule or syntax, are intended to be defined in another (likely application- or domain-specific) ontology."@en ;
-               
-               <http://www.w3.org/2004/02/skos/core#prefLabel> "Mapping Detail"@en ;
-               
-               <http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> "Mapping Details"@en ;
-               
-               <http://www.w3.org/2004/02/skos/core#scopeNote> """MappingDetail is used (for example) when defining the transformation of an individual that is an enumerated value. It is used as the object for the property, mappedUsingDetail. 
-MappingDetail is an underspecified class that is defined (and likely subclassed) in another ontology, to fit the needs of an application or domain. (In which case, the IRI of the corresponding class in the other ontology would be related using an owl:equivalentClass axiom.)
-
-When using MappingDetail, it is mandatory that a mappedToTarget triple be defined."""@en ;
-               
-               <http://www.w3.org/2004/02/skos/core#example> """http://some_namespace/detailIndividual with triples:
-* http://some_namespace/entity_mappedFrom - mappedUsingDetail - http://some_namespace/detailIndividual
-* http://some_namespace/detailIndividual - mappedToTarget - http://some_namespace/entity_mappedTo
-* Subclass or other properties of http://some_namespace/detailIndividual define the transformation/calculation involved in the mapping (from the entity_mappedFrom to the entity_mappedTo)"""@en .
-
-
-
 ###  http://purl.org/ninepts/metadata/metadata-properties#Modification
 
 :Modification rdf:type owl:Class ;
               
-              <http://purl.org/dc/elements/1.1/description> "Describes a change or update to the entity defined as the subject of the hasModification object property."@en ;
+              <http://purl.org/dc/elements/1.1/description> "Describes a change (or coordinated set of changes) to an entity.  A Modification instance has data and object properties to define the date(s) of change, the contributors, changeNote(s), etc.  It is related to the updated entity via the hasModification object property."@en ;
               
               <http://www.w3.org/2004/02/skos/core#prefLabel> "Modification"@en ;
               
@@ -296,7 +550,7 @@ When Modification is used to collect the change information, it is mandatory tha
 Since Modification collects the related change information, it is recommended that the following properties/predicates are specified for each instance:
 
  - dateModified (where dateModified is the data property defined in this ontology and not the annotation property)
- - contributor (reusing the annotation property, http://purl.org/dc/elements/1.1/contributor) or someActor - contributedTo - modificationIndividual (if actor/user individuals are available, and where contributedTo is the object property defined in this ontology)
+ - contributor (reusing the annotation property, http://purl.org/dc/elements/1.1/contributor) or someActor - contributedTo - modificationIndividual (the latter is recommended when actor/user individuals are available) 
  - changeNote (reusing the annotation property, http://www.w3.org/2004/02/skos/core#changeNote)
 
 Note that additional properties may be defined for the Modification class, if desired.  Only the main concepts, related to the Dublin Core and SKOS definitions, are captured in this ontology.
@@ -308,10 +562,10 @@ Note that additional properties may be defined for the Modification class, if de
               <http://purl.org/ninepts/metadata/metadata-annotations#prefLabel_Plural> "Modifications"@en ;
               
               <http://www.w3.org/2004/02/skos/core#example> """http://some_namespace/modificationIndividual with triples:
-* http://some_namespace/modifiedEntity - hasModification - http://some_namespace/modificationIndividual
-* http://some_namespace/modificationIndividual - dateModified - dateTime value
-* http://some_namespace/modificationIndividual - contributor - name string (or http://some_namespace/someActor - contributedTo - http://some_namespace/modificationIndividual)
-* http://some_namespace/modificationIndividual - changeNote - modification details string"""@en .
+* http://some_namespace/modifiedIndividual - hasModification - http://some_namespace/modificationIndividual
+* http://some_namespace/modificationIndividual - dateModified - dateTime value (or less recommended since the object is a literal value, http://some_namespace/modificationIndividual - annotations:dateModified - date time string)
+* http://some_namespace/modificationIndividual - dc:contributor - name string (or http://some_namespace/someActor - contributedTo - http://some_namespace/modificationIndividual)
+* http://some_namespace/modificationIndividual - skos:changeNote - modification details string"""@en .
 
 
 

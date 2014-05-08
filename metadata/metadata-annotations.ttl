@@ -10,31 +10,9 @@
                                                         
                                                         :license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
                                                         
-                                                        :anotherFormatOf "http://purl.org/ninepts/metadata/metadata-annotations.ofn"^^xsd:anyURI ;
+                                                        :anotherFormat "http://purl.org/ninepts/metadata/metadata-annotations.ofn"^^xsd:anyURI ;
                                                         
                                                         rdfs:seeAlso "http://purl.org/ninepts/metadata/metadata-properties.ttl"^^xsd:anyURI ;
-                                                        
-                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?s, ?work WHERE { 
-   ?s <skos:editorialNote> ?work . 
-} 
-# What work remains to be done on the ontology, and what decisions still need to be made?""" ;
-                                                        
-                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """01 May 2014
-* Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)"""@en ;
-                                                        
-                                                        :dateCreated "2014-04-16" ;
-                                                        
-                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """28 April 2014
-* Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
-** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
-* Removed the definition property (since description can be used), the coverage properties (since their semantics are not precise and keywords are available), and the usageNote property (since scopeNote could be used instead)
-* Completed the metadata details of the remaining properties
-* Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
-* Renamed the property, replaces, to replacementFor
-* Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"""@en ;
                                                         
                                                         :keyword "Dublin Core"@en ;
                                                         
@@ -45,25 +23,20 @@ SELECT ?s, ?work WHERE {
                                                         :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?s, ?change WHERE { 
-   ?s <skos:changeNote> ?change . 
-} 
-# How has the ontology evolved? What changes have been documented in the ontology?""" ,
-                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata WHERE { 
-    ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   OPTIONAL {
-      ?metadata <skos:example> ?example . 
-   } . 
-   FILTER ( 
-      !bound(?example) 
-   ) 
-} 
-# What metadata properties in the ontology have no example?""" ;
+SELECT ?s ?work WHERE { 
+   ?s skos:editorialNote ?work . 
+}
+# What work remains to be done on the ontology, and what decisions still need to be made?""" ;
                                                         
-                                                        :dateLastModified "2014-05-01" ;
+                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """01 May 2014
+* Corrected the predicate of one of the competencyQueries (was mislabeled as competencyQuestions)"""@en ;
+                                                        
+                                                        :competencyQuery """SELECT ?p ?o WHERE { 
+   <http://purl.org/ninepts/metadata/metadata-annotations> ?p ?o . 
+}
+# What metadata information is available for the ontology?""" ;
+                                                        
+                                                        :dateLastModified "2014-05-07" ;
                                                         
                                                         <http://www.w3.org/2004/02/skos/core#scopeNote> """It is important to note that not all concepts are included from the Dublin Core or SKOS sources.  Where the concepts overlap with established semantics in RDF or OWL 2, they are not repeated. A list of the omitted concepts is provided below.
 
@@ -90,75 +63,102 @@ What follows is a list of the Dublin Core Elements vocabulary and SKOS model con
                                                         
                                                         :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?s ?change WHERE { 
+   ?s skos:changeNote ?change . 
+}
+# How has the ontology evolved? What changes have been documented in the ontology?""" ;
+                                                        
+                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """28 April 2014
+* Updated the URIs of the widely deployed Dublin Core and SKOS concepts to use the DC and SKOS URIs 
+** Updated URIs are: contributor, coverage, creator, date, description, language, relation, rights, *Label, note, *Note
+* Removed the definition property (since description can be used), the coverage properties (since their semantics are not precise and keywords are available), and the usageNote property (since scopeNote could be used instead)
+* Completed the metadata details of the remaining properties
+* Added altLabel_Plural and prefLabel_Plural properties, and competencyQuestions and competencyQuery properties
+* Renamed the property, replaces, to replacementFor
+* Moved exactMatch to be a sub-property of closeMatch, as defined by SKOS"""@en ;
+                                                        
+                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 SELECT ?metadata WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
+   ?metadata rdf:type owl:AnnotationProperty . 
    FILTER ( 
       regex(str(?metadata), \"skos/core\") || regex(str(?metadata), \"dc/elements\") 
    ) 
-} 
-# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?""" ;
-                                                        
-                                                        :mimeType "text/turtle" ;
-                                                        
-                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-SELECT ?metadata, ?mapping, ?stdConcept WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata ?mapping ?stdConcept . 
-   FILTER ( 
-      regex(str(?mapping), \"closeMatch\") || regex(str(?mapping), \"exactMatch\") || 
-      regex(str(?mapping), \"inspiredBy”) || regex(str(?mapping), \"moreGeneralThan”) ||  
-      regex(str(?mapping), \"moreSpecificThan”) 
-   ) . 
-   FILTER ( 
-      regex(str(? stdConcept), \"skos/core”) || regex(str(? stdConcept), \"dc/elements”) 
-   ) 
-} 
-# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?""" ;
-                                                        
-                                                        <http://www.w3.org/2004/02/skos/core#editorialNote> "All of the competencyQueries need to be tested"@en ;
-                                                        
-                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
-SELECT ?query WHERE { 
-   ?s <meta:competencyQuery> ?query . 
-} 
-# What queries should be run to validate the ontology?""" ,
+}
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, what Dublin Core and SKOS values are directly defined/used in the ontology?""" ,
                                                                          """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata, ?example WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <skos:example> ?example . 
-} 
-# What is an example of the use of each of the metadata properties?""" ;
+SELECT ?metadata WHERE { 
+    ?metadata rdf:type owl:AnnotationProperty . 
+   OPTIONAL {
+      ?metadata skos:example ?example . 
+   } . 
+   FILTER ( 
+      !bound(?example) 
+   ) 
+}
+# What metadata properties in the ontology have no example?""" ,
+                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+SELECT ?metadata ?description WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata dc:description ?description . 
+}
+# What is the meaning/semantic of each of the metadata properties?""" ;
+                                                        
+                                                        :dateCreated "2014-04-16" ;
+                                                        
+                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+SELECT ?metadata ?mapping ?stdConcept WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata ?mapping ?stdConcept . 
+   FILTER ( 
+      regex(str(?mapping), \"closeMatch\") || regex(str(?mapping), \"exactMatch\") || 
+      regex(str(?mapping), \"inspiredBy\") || regex(str(?mapping), \"moreGeneralThan\") ||  
+      regex(str(?mapping), \"moreSpecificThan\") 
+   ) . 
+   FILTER ( 
+      regex(str(?stdConcept), \"skos/core\") || regex(str(?stdConcept), \"dc/elements\") 
+   ) 
+}
+# How do the metadata properties correspond/map to the Dublin Core and SKOS concepts?  Specifically, are there any mappings of metadata properties to Dublin Core and SKOS concepts?""" ,
+                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX meta: <http://purl.org/ninepts/metadata/metadata-annotations#>
+SELECT ?query WHERE { 
+   ?s meta:competencyQuery ?query . 
+}
+# What queries should be run to validate the ontology?""" ;
                                                         
                                                         <http://purl.org/dc/elements/1.1/creator> """Andrea Westerinen
 Nine Points Solutions, LLC""" ;
                                                         
+                                                        owl:priorVersion "0.5.0" ;
+                                                        
+                                                        <http://www.w3.org/2004/02/skos/core#changeNote> """07 May 2014
+* Description property for moreSpecificThan should have been an example property
+* Updated examples for the relation properties
+* Updated all the competencyQueries (correcting the syntax)"""@en ;
+                                                        
                                                         :copyright "Copyright (c) 2014 Nine Points Solutions, LLC"@en ;
                                                         
-                                                        :competencyQuery """SELECT ?p, ?o WHERE { 
-   <http://purl.org/ninepts/metadata/metadata-annotations> ?p ?o . 
-} 
-# What metadata information is available for the ontology?""" ,
-                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
-SELECT ?metadata, ?scope WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <skos:scopeNote> ?scope . 
-} 
-# Are there any restrictions or suggestions for the use of the various metadata properties?""" ,
-                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-SELECT ?metadata, ?description WHERE { 
-   ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   ?metadata <dc:description> ?description . 
-} 
-# What is the meaning/semantic of each of the metadata properties?""" ;
+SELECT ?metadata WHERE { 
+    ?metadata rdf:type owl:AnnotationProperty . 
+   OPTIONAL {
+      ?metadata dc:description ?description . 
+   } . 
+   FILTER ( 
+      !bound(?description) 
+   ) 
+}
+# What metadata properties in the ontology have no description?""" ;
                                                         
                                                         :keyword "SKOS"@en ;
                                                         
@@ -192,21 +192,9 @@ Issues with the ontology may be entered and tracked at http://github.com/NinePts
                                                         
                                                         <http://purl.org/dc/elements/1.1/language> "en-US" ;
                                                         
-                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX dc: <http://purl.org/dc/elements/1.1/> 
-SELECT ?metadata WHERE { 
-    ?metadata <rdf:type> <owl:AnnotationProperty> . 
-   OPTIONAL {
-      ?metadata <dc:description> ?description . 
-   } . 
-   FILTER ( 
-      !bound(?description) 
-   ) 
-} 
-# What metadata properties in the ontology have no description?""" ;
+                                                        :keyword "metadata"@en ;
                                                         
-                                                        owl:priorVersion "0.1.0" ;
+                                                        :mimeType "text/turtle" ;
                                                         
                                                         :competencyQuestions """* What metadata information is available for the ontology?
 * What is the meaning/semantic of each of the metadata properties?
@@ -218,15 +206,30 @@ SELECT ?metadata WHERE {
 * What queries should be run to validate the ontology?
 * What metadata properties have no description or no example?"""@en ;
                                                         
+                                                        :competencyQuery """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?metadata ?scope WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata skos:scopeNote ?scope . 
+}
+# Are there any restrictions or suggestions for the use of the various metadata properties?""" ,
+                                                                         """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?metadata ?example WHERE { 
+   ?metadata rdf:type owl:AnnotationProperty . 
+   ?metadata skos:example ?example . 
+}
+# What is an example of the use of each of the metadata properties?""" ;
+                                                        
                                                         rdfs:comment """This ontology is a consolidation of basic metadata concepts from the Dublin Core Element and Terms vocabularies, and the SKOS data model.  The semantics are captured as annotation properties.  
 
 Where the concepts are widely deployed from Dublin Core and SKOS, the property names use the full URIs from those sources.  For example, the property name of \"description\" is the Dublin Core URI, http://purl.org/dc/elements/1.1/description, and does not use this ontology's namespace.  This allows tooling that \"understands\" the standard terms (like description or SKOS' prefLabel) to immediately recognize (and appropriately present) the concepts.
 
 Note that the ontology referenced using the seeAlso property (http://purl.org/ninepts/metadata/metadata-properties.ofn) defines several of the  annotation properties as data and object properties.  This allows (for example) validating  dateTime values and referencing objects/individuals in relations (as opposed to using literal values). """@en ;
                                                         
-                                                        :keyword "metadata"@en ;
-                                                        
-                                                        owl:versionIRI <http://purl.org/ninepts/metadata/metadata-annotations/0.5.0> .
+                                                        owl:versionIRI <http://purl.org/ninepts/metadata/metadata-annotations/0.6.0> .
 
 
 #################################################################
@@ -351,11 +354,11 @@ Language values must follow the syntax defined in IETF RFC 4646.  The RFC is ava
                                            
                                            <http://www.w3.org/2004/02/skos/core#scopeNote> "Use of this property is not recommended.  Instead, use of one of its subproperties is recommended since those properties define explicit semantics and format."@en ;
                                            
-                                           <http://www.w3.org/2004/02/skos/core#example> "http://namespace_info/some_entity - relation - http://namespace_info/some_related_entity"@en ;
-                                           
                                            <http://www.w3.org/2004/02/skos/core#prefLabel> "relation"@en ;
                                            
-                                           :prefLabel_Plural "relations"@en .
+                                           :prefLabel_Plural "relations"@en ;
+                                           
+                                           <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someRelatedEntity"@en .
 
 
 
@@ -363,13 +366,13 @@ Language values must follow the syntax defined in IETF RFC 4646.  The RFC is ava
 
 <http://purl.org/dc/elements/1.1/rights> rdf:type owl:AnnotationProperty ;
                                          
+                                         <http://www.w3.org/2004/02/skos/core#example> "Digital rights, licensing, copyright details as text"@en ;
+                                         
                                          <http://purl.org/dc/elements/1.1/description> "Information about the entitlements held in and over the ontology."@en ;
                                          
                                          <http://www.w3.org/2004/02/skos/core#scopeNote> """It is assumed that the rights property (and its sub-properties) only apply at the ontology level.
 
 Although the property could be applied to any OWL construct, it is discouraged to use it at the class, property or  individual level.  Having different rights for entities within the ontology (different from the rights defined at the ontology level) may result in misuse of the information.  It is recommended that entities with different rights be placed in different ontologies and different ontology files."""@en ;
-                                         
-                                         <http://www.w3.org/2004/02/skos/core#example> "MIT License (license details)"@en ;
                                          
                                          rdfs:comment "Typically, rights information includes a statement about various property rights associated with the ontology, including intellectual property rights."@en ;
                                          
@@ -405,24 +408,30 @@ Since relationships between annotation property values cannot be defined, it is 
 
 
 
-###  http://purl.org/ninepts/metadata/metadata-annotations#anotherFormatOf
+###  http://purl.org/ninepts/metadata/metadata-annotations#anotherFormat
 
-:anotherFormatOf rdf:type owl:AnnotationProperty ;
-                 
-                 :moreSpecificThan "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI ;
-                 
-                 :exactMatch "http://purl.org/dc/terms/hasFormat"^^xsd:anyURI ;
-                 
-                 <http://www.w3.org/2004/02/skos/core#scopeNote> "Note that this relationship can be interpreted as symmetric and transitive."@en ;
-                 
-                 <http://purl.org/dc/elements/1.1/description> "References an ontology, class, property or individual that is substantially the same as the subject of this relation, but in another format."@en ;
-                 
-                 <http://www.w3.org/2004/02/skos/core#prefLabel> "another format of"@en ;
-                 
-                 <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/ontology-es.ofn - anotherFormatOf - http://some_namespace/ontology.ofn (a version of the ontology, rendered using Spanish as the native language, is \"anotherFormatOf\" the original ontology)"@en ,
-                                                               "http://some_namespace/ontology.rdf - anotherFormatOf - http://some_namespace/ontology.ofn (the ontology serialized using RDF/XML is anotherFormatOf the ontology serialized using OWL Functional Syntax)"@en ;
-                 
-                 rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation> .
+:anotherFormat rdf:type owl:AnnotationProperty ;
+               
+               :moreSpecificThan "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI ;
+               
+               :exactMatch "http://purl.org/dc/terms/hasFormat"^^xsd:anyURI ;
+               
+               <http://www.w3.org/2004/02/skos/core#example> """More specific example:
+http://some_namespace/ontology-es.ofn (defined for an ontology written in English for a version of an ontology rendered using Spanish as the native language)"""@en ,
+                                                             """More specific example:
+http://some_namespace/ontology.rdf (defined for an ontology serialized in Turtle, referencing the ontology serialized using RDF/XML)"""@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#scopeNote> "Note that this relationship can be interpreted as transitive."@en ;
+               
+               <http://purl.org/dc/elements/1.1/description> "References an ontology, class, property or individual that is substantially the same as the subject of this relation, but in another format."@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#prefLabel> "another format"@en ;
+               
+               :prefLabel_Plural "other formats"@en ;
+               
+               <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someExample"@en ;
+               
+               rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation> .
 
 
 
@@ -440,7 +449,7 @@ Since relationships between annotation property values cannot be defined, it is 
             
             <http://www.w3.org/2004/02/skos/core#prefLabel> "close match"@en ;
             
-            <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/some_entity - closeMatch - http://some_other_namespace/some_similar_entity"@en ;
+            <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someSimilarEntity"@en ;
             
             rdfs:subPropertyOf :mappingRelation .
 
@@ -602,7 +611,7 @@ In Dublin Core, values of the modified date property use the format defined by t
             
             <http://www.w3.org/2004/02/skos/core#prefLabel> "exact match"@en ;
             
-            <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/some_entity - exactMatch - http://some_other_namespace/some_other_entity"@en ;
+            <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someEquivalentEntity"@en ;
             
             rdfs:subPropertyOf :closeMatch .
 
@@ -614,12 +623,13 @@ In Dublin Core, values of the modified date property use the format defined by t
             
             :moreSpecificThan "http://purl.org/dc/elements/1.1/relation"^^xsd:anyURI ;
             
+            <http://www.w3.org/2004/02/skos/core#example> "ISBN reference (to publication containing basic concepts)"@en ;
+            
             <http://purl.org/dc/elements/1.1/description> "References some entity which inspired the definition of the subject of the relationship.  The referenced entity could be of similar scope and definition (for example, a class in one ontology inspiring the definition of class or property in another ontology), or completely different (for example, Aristotle's classifications providing the basis for an \"upper\" ontology)."@en ;
             
-            <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/ontology.rdf - inspiredBy - ISBN reference (to publication containing basic concepts)"@en ,
-                                                          "http://some_namespace/some_entity - inspiredBy - http://some_other_namespace/some_other_entity"@en ;
-            
             <http://www.w3.org/2004/02/skos/core#prefLabel> "inspired by"@en ;
+            
+            <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someSource"@en ;
             
             rdfs:subPropertyOf :mappingRelation .
 
@@ -684,11 +694,11 @@ Although the property could be applied to any OWL construct, it is discouraged t
                  
                  <http://purl.org/dc/elements/1.1/description> "References an ontology, class, property or individual which can be mapped to the subject of the relationship."@en ;
                  
-                 <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/some_entity - mappingRelation - http://some_other_namespace/some_other_entity"@en ;
-                 
                  <http://www.w3.org/2004/02/skos/core#prefLabel> "mapping relation"@en ;
                  
                  :prefLabel_Plural "mapping relations"@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someMappedEntity"@en ;
                  
                  rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation> .
 
@@ -741,9 +751,9 @@ http://www.iana.org/assignments/media-types/media-types.xhtml."""@en ;
 
 Note that this relation can be considered to be transitive.  That is why it is only defined as a \"closeMatch\" to the SKOS concepts of narrowMatch and narrower.  (In the SKOS model, these two relations are not guaranteed to be transitive.)"""@en ;
                  
-                 <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/some_entity - moreGeneralThan - http://some_namespace/some_more_specific_entity"@en ;
-                 
                  <http://www.w3.org/2004/02/skos/core#prefLabel> "more general than"@en ;
+                 
+                 <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someMoreSpecificEntity"@en ;
                  
                  rdfs:subPropertyOf :mappingRelation .
 
@@ -764,9 +774,9 @@ Note that this relation can be considered to be transitive.  That is why it is o
 
 Note that this relation can be considered to be transitive.  That is why it is only defined as a \"closeMatch\" to the SKOS concepts of broadMatch and broader.  (In the SKOS model, these two relations are not guaranteed to be transitive.)"""@en ;
                   
-                  <http://purl.org/dc/elements/1.1/description> "http://some_namespace/some_entity - moreSpecificThan - http://some_namespace/some_more_general_entity"@en ;
-                  
                   <http://www.w3.org/2004/02/skos/core#prefLabel> "more specific than"@en ;
+                  
+                  <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someMoreGeneralEntity"@en ;
                   
                   rdfs:subPropertyOf :mappingRelation .
 
@@ -800,16 +810,18 @@ The plural form of a prefLabel is not needed for single valued/functional proper
                 
                 :exactMatch "http://purl.org/dc/terms/replaces"^^xsd:anyURI ;
                 
+                <http://www.w3.org/2004/02/skos/core#example> """More specific example:
+http://some_namespace/ontology_v1.ofn (defined for v2 of an ontology, referencing a version which it replaces)"""@en ;
+                
                 <http://purl.org/dc/elements/1.1/description> "References an ontology, class, property or individual that is supplanted, displaced or superceded by the subject of the relation."@en ;
                 
                 <http://www.w3.org/2004/02/skos/core#scopeNote> """The replacementFor relation can be used in many different scenarios- for example, to describe the wholesale evolution of an ontology or individual (such as a document/specification), or to describe how a class or property definition evolves over time.  In the case of the latter, a class or property could be deprecated (using the owl#deprecated annotation property), and a new entity defined that is a \"replacementFor\" it.
 
 Note that the relation can be interpreted as transitive."""@en ;
                 
-                <http://www.w3.org/2004/02/skos/core#example> "http://some_namespace/ontology_v2.ofn - replacementFor - http://some_namespace/ontology_v1.ofn"@en ,
-                                                              "http://some_namespace/some_entity - replacementFor -  http://some_namespace/some_deprecated_entity"@en ;
-                
                 <http://www.w3.org/2004/02/skos/core#prefLabel> "replacement for"@en ;
+                
+                <http://www.w3.org/2004/02/skos/core#example> "text_includingURI_defining_someDeprecatedOrOlderEntity"@en ;
                 
                 rdfs:subPropertyOf <http://purl.org/dc/elements/1.1/relation> .
 
