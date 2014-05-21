@@ -101,57 +101,84 @@ THE SOFTWARE.
       	    <xsl:value-of select="substring-after(./@rdf:about,'#')"/>
       	  </xsl:otherwise>  
         </xsl:choose>
-      </xsl:variable>
-      
-      <!-- get the property's domain -->
-      <xsl:variable name="domain">
-        <xsl:choose>
-          <xsl:when test="./rdfs:domain">
-            <xsl:value-of select="substring-after(./rdfs:domain/@rdf:resource,'#')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="'Thing'"/>
-          </xsl:otherwise>	
-        </xsl:choose> 
-      </xsl:variable>  
-      
-      <!-- get the property's range -->
-      <xsl:variable name="range">
-        <xsl:choose>
-          <xsl:when test="./rdfs:range">
-            <xsl:value-of select="substring-after(./rdfs:range/@rdf:resource,'#')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="'Thing'"/>
-          </xsl:otherwise>	
-        </xsl:choose>
-      </xsl:variable>  
+      </xsl:variable>      
       
       <!-- get the propety's type - i.e., Functional, Transitive, etc. -->
-      <xsl:variable name="type">
-        <xsl:choose>
-          <xsl:when test="./rdf:type">
-            <xsl:value-of select="substring-after(./rdf:type/@rdf:resource,'#')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="''"/>
-          </xsl:otherwise>	
-        </xsl:choose>
-      </xsl:variable>  
+      <xsl:choose>
       
-      <!-- add the property to the graph -->
-      <xsl:call-template name="objPropImage">
-        <xsl:with-param name="pName" select="$pName"/>
-        <xsl:with-param name="pLabel" select="$pLabel"/>
-        <xsl:with-param name="type" select="$type"/>
-      </xsl:call-template>      
+        <!-- if a type is defined -->
+        <xsl:when test="./rdf:type">
+          <xsl:variable name="type"> 
+            <xsl:for-each select="./rdf:type">
+              <xsl:value-of select="concat(substring-after(./@rdf:resource,'#'),', ')"/>
+            </xsl:for-each>  
+          </xsl:variable>
+          
+          <!-- add the property to the graph, with the type -->
+          <xsl:call-template name="objPropImage">
+            <xsl:with-param name="pName" select="$pName"/>
+            <xsl:with-param name="pLabel" select="$pLabel"/>
+            <xsl:with-param name="type" select="$type"/>
+          </xsl:call-template>
+        </xsl:when>
+        
+        <!-- if no type is defined, just add the property -->
+        <xsl:otherwise>   
+          <xsl:call-template name="objPropImage">
+            <xsl:with-param name="pName" select="$pName"/>
+            <xsl:with-param name="pLabel" select="$pLabel"/>
+            <xsl:with-param name="type" select="''"/>
+          </xsl:call-template>
+        </xsl:otherwise>
+      </xsl:choose>  
       
-      <!-- add the domain/range-property edge to the graph -->
-      <xsl:call-template name="drawObjPropertyEdge">
-        <xsl:with-param name="pName" select="$pName"/>
-        <xsl:with-param name="domain" select="$domain"/>
-        <xsl:with-param name="range" select="$range"/>
-      </xsl:call-template>  
+      <!-- get the property's domain -->
+      <xsl:choose>
+      
+        <!-- if a domain is defined -->
+        <xsl:when test="./rdfs:domain">  
+          <xsl:for-each select="./rdfs:domain">  <!-- there may be more than one defined -->
+        	<xsl:call-template name="drawObjPropertyEdge">
+        	  <xsl:with-param name="pName" select="$pName"/>
+        	  <xsl:with-param name="cName" select="substring-after(./@rdf:resource,'#')"/>
+        	  <xsl:with-param name="type" select="'domain'"/>
+        	</xsl:call-template>	
+          </xsl:for-each>
+        </xsl:when>  
+        
+        <!-- if a domain is NOT defined -->
+        <xsl:otherwise>  
+          <xsl:call-template name="drawObjPropertyEdge">
+        	<xsl:with-param name="pName" select="$pName"/>
+        	<xsl:with-param name="cName" select="'Thing'"/>
+        	<xsl:with-param name="type" select="'domain'"/>
+          </xsl:call-template>	
+        </xsl:otherwise>
+      </xsl:choose>     
+ 
+       <!-- get the property's range -->
+      <xsl:choose>
+      
+        <!-- if a range is defined -->
+        <xsl:when test="./rdfs:range">  
+          <xsl:for-each select="./rdfs:range">  <!-- there may be more than one defined -->
+        	<xsl:call-template name="drawObjPropertyEdge">
+        	  <xsl:with-param name="pName" select="$pName"/>
+        	  <xsl:with-param name="cName" select="substring-after(./@rdf:resource,'#')"/>
+        	  <xsl:with-param name="type" select="'range'"/>
+        	</xsl:call-template>	
+          </xsl:for-each>
+        </xsl:when>  
+        
+        <!-- if a range is NOT defined -->
+        <xsl:otherwise>  
+          <xsl:call-template name="drawObjPropertyEdge">
+        	<xsl:with-param name="pName" select="$pName"/>
+        	<xsl:with-param name="cName" select="'Thing'"/>
+        	<xsl:with-param name="type" select="'range'"/>
+          </xsl:call-template>	
+        </xsl:otherwise>
+      </xsl:choose>  
       
     </xsl:for-each>
     
@@ -172,18 +199,6 @@ THE SOFTWARE.
       	  </xsl:otherwise>  
         </xsl:choose>
       </xsl:variable>
-      
-      <!-- get the property's domain -->
-      <xsl:variable name="domain">
-        <xsl:choose>
-          <xsl:when test="./rdfs:domain">
-            <xsl:value-of select="substring-after(./rdfs:domain/@rdf:resource,'#')"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <xsl:value-of select="'Thing'"/>
-          </xsl:otherwise>	
-        </xsl:choose> 
-      </xsl:variable>  
       
       <!-- get the property's range -->
       <xsl:variable name="range">
@@ -215,13 +230,29 @@ THE SOFTWARE.
         <xsl:with-param name="pLabel" select="$pLabel"/>
         <xsl:with-param name="range" select="$range"/>
         <xsl:with-param name="type" select="$type"/>
-      </xsl:call-template>   
+      </xsl:call-template>  
       
-      <!-- add the domain-property edge to the graph -->
-      <xsl:call-template name="drawDataPropertyEdge">
-        <xsl:with-param name="node1" select="$pName"/>
-        <xsl:with-param name="node2" select="$domain"/>
-      </xsl:call-template>   
+      <!-- get the property's domain -->
+      <xsl:choose>
+      
+        <!-- if a domain is defined -->
+        <xsl:when test="./rdfs:domain">  
+          <xsl:for-each select="./rdfs:domain">  <!-- there may be more than one defined -->
+        	<xsl:call-template name="drawDataPropertyEdge">
+        	  <xsl:with-param name="pName" select="$pName"/>
+        	  <xsl:with-param name="cName" select="substring-after(./@rdf:resource,'#')"/>
+        	</xsl:call-template>	
+          </xsl:for-each>
+        </xsl:when>  
+        
+        <!-- if a domain is NOT defined -->
+        <xsl:otherwise>  
+          <xsl:call-template name="drawDataPropertyEdge">
+        	<xsl:with-param name="pName" select="$pName"/>
+        	<xsl:with-param name="cName" select="'Thing'"/>
+          </xsl:call-template>	
+        </xsl:otherwise>
+      </xsl:choose>  
       
     </xsl:for-each>    
     
@@ -305,7 +336,8 @@ THE SOFTWARE.
             </xsl:attribute>
             <xsl:value-of select="$pLabel"/>
             <xsl:if test="string-length($type) &gt; 0">
-              <xsl:value-of select="concat('&#xA;(',$type,')')"/>
+              <xsl:variable name="adjustedType" select="substring($type,1,string-length($type)-2)"/>
+              <xsl:value-of select="concat('&#xA;(',$adjustedType,')')"/>
             </xsl:if>
           </y:NodeLabel>
           <y:Shape type="rectangle"/>
@@ -314,22 +346,33 @@ THE SOFTWARE.
     </node>
   </xsl:template>  
   
-  <!-- drawing domain-object and object-range property edges -->
+  <!-- drawing domain-object or object-range property edges -->
   <xsl:template name="drawObjPropertyEdge">
-    <xsl:param name="domain"/>
-    <xsl:param name="range"/>
+    <xsl:param name="cName"/>
+    <xsl:param name="type"/>
     <xsl:param name="pName"/>
-    <xsl:param name="pLabel"/>
     <edge>
       <xsl:attribute name="id"> 
-        <xsl:value-of select="concat($domain,'-',$pName)"/>
+        <xsl:value-of select="concat($cName,'-',$type,'-',$pName)"/>
       </xsl:attribute>
-      <xsl:attribute name="source">
-        <xsl:value-of select="$domain"/>
-      </xsl:attribute>
-      <xsl:attribute name="target">
-        <xsl:value-of select="$pName"/>
-      </xsl:attribute>
+      <xsl:choose>
+        <xsl:when test="$type = 'domain'">
+          <xsl:attribute name="source">
+            <xsl:value-of select="$cName"/>
+          </xsl:attribute>
+          <xsl:attribute name="target">
+            <xsl:value-of select="$pName"/>
+          </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="source">
+            <xsl:value-of select="$pName"/>
+          </xsl:attribute>
+          <xsl:attribute name="target">
+            <xsl:value-of select="$cName"/>
+          </xsl:attribute>
+        </xsl:otherwise>  
+      </xsl:choose>  
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -340,26 +383,6 @@ THE SOFTWARE.
         </y:PolyLineEdge>
       </data>
     </edge>  
-    <edge>
-      <xsl:attribute name="id"> 
-        <xsl:value-of select="concat($pName,'-',$range)"/>
-      </xsl:attribute>
-      <xsl:attribute name="source">
-        <xsl:value-of select="$pName"/>
-      </xsl:attribute>
-      <xsl:attribute name="target">
-        <xsl:value-of select="$range"/>
-      </xsl:attribute>
-      <data key="d9"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#0000FF" type="line" width="2.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
     
   </xsl:template>
   
@@ -419,17 +442,17 @@ THE SOFTWARE.
   
   <!-- drawing a class-data property edge -->
   <xsl:template name="drawDataPropertyEdge">
-    <xsl:param name="node1"/>
-    <xsl:param name="node2"/>
+    <xsl:param name="pName"/>
+    <xsl:param name="cName"/>
     <edge>
       <xsl:attribute name="id"> 
-        <xsl:value-of select="concat($node1,'-',$node2)"/>
+        <xsl:value-of select="concat($pName,'-',$cName)"/>
       </xsl:attribute>
       <xsl:attribute name="source">
-        <xsl:value-of select="$node1"/>
+        <xsl:value-of select="$pName"/>
       </xsl:attribute>
       <xsl:attribute name="target">
-        <xsl:value-of select="$node2"/>
+        <xsl:value-of select="$cName"/>
       </xsl:attribute>
       <data key="d9"/>
       <data key="d10">
