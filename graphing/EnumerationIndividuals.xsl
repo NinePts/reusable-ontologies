@@ -55,7 +55,7 @@ THE SOFTWARE.
   
     <!-- process each individual -->
     <!-- assumes that individuals are defined in the ontology to provide enum values
-            (too simplistic) -->
+            (a very simplistic assumption) -->
     <xsl:for-each select="/rdf:RDF/owl:NamedIndividual">
       
       <!-- get the individual name -->
@@ -78,55 +78,66 @@ THE SOFTWARE.
         <xsl:with-param name="eName" select="$eName"/>
         <xsl:with-param name="eLabel" select="$eLabel"/>
         <xsl:with-param name="type" select="'individual'"/>
-      </xsl:call-template>     
-   
+      </xsl:call-template>
+      
+      <!-- get the individual's type(s) -->  
+      <xsl:for-each select="./rdf:type">
+        
+        <!-- get type name -->
+        <xsl:variable name="cName" select="substring-after(./@rdf:resource,'#')"/>
+
+        <!-- draw an edge from the individual to the class --> 
+        <xsl:call-template name="drawClassIndividualEdge">
+          <xsl:with-param name="cName" select="$cName"/>
+          <xsl:with-param name="iName" select="$eName"/>
+        </xsl:call-template>  
+         
+      </xsl:for-each>
     </xsl:for-each>
     
-    <!-- get classes with oneOf semantics -->
-    <!-- again, assuming a very simplistic approach to enumerations -->
+    <!-- get classes separately, to get label info 
+         assumes that the class is defined in the same ontology file as the individual -->
     <xsl:for-each select="/rdf:RDF/owl:Class">
     
-      <!-- check for presence of oneOf -->
-      <xsl:if test=".//owl:oneOf">
-            
-        <!-- get the class name that uses oneOf -->
-        <xsl:variable name="eName" select="substring-after(./@rdf:about,'#')"/>
-        
-        <!-- get the class label -->
-        <xsl:variable name="eLabel">
-          <xsl:choose>
-      	    <xsl:when test="./skos:prefLabel">
-      	      <xsl:value-of select="./skos:prefLabel/text()"/>
-      	    </xsl:when>
-      	    <xsl:otherwise>
-      	      <xsl:value-of select="substring-after(./@rdf:about,'#')"/>
-      	    </xsl:otherwise>  
-          </xsl:choose>
-        </xsl:variable>  
-        
-        <!-- add the class to the graph -->
-        <xsl:call-template name="entityImage">
-          <xsl:with-param name="eName" select="$eName"/>
-          <xsl:with-param name="eLabel" select="$eLabel"/>
-          <xsl:with-param name="type" select="'class'"/>
-        </xsl:call-template>     
+      <!-- get the class name -->
+      <xsl:variable name="eName" select="substring-after(./@rdf:about,'#')"/>
       
-        <!-- get the rdf:Description entries that define the oneOf members -->
-        <xsl:for-each select=".//owl:oneOf/rdf:Description">
-              
-          <!-- get the individual name -->
-          <xsl:variable name="iName" select="substring-after(./@rdf:about,'#')"/>
-      
-          <!-- draw an edge from the individual to the class --> 
-          <xsl:call-template name="drawClassIndividualEdge">
-            <xsl:with-param name="cName" select="$eName"/>
-            <xsl:with-param name="iName" select="$iName"/>
-          </xsl:call-template>     
-   
-        </xsl:for-each>
+      <!-- get the class label -->
+      <xsl:variable name="eLabel">
+        <xsl:choose>
+          <xsl:when test="./skos:prefLabel">
+            <!-- check for presence of oneOf -->
+            <xsl:choose>
+              <xsl:when test=".//owl:oneOf">
+    	        <xsl:value-of select="concat(./skos:prefLabel/text(),'&#xA;(Closed Enum)')"/>
+    	      </xsl:when>
+    	      <xsl:otherwise>
+    	        <xsl:value-of select="./skos:prefLabel/text()"/>
+    	      </xsl:otherwise>  
+      	    </xsl:choose>
+      	  </xsl:when>
+      	  
+      	  <xsl:otherwise>
+            <!-- check for presence of oneOf -->
+            <xsl:choose>
+              <xsl:when test=".//owl:oneOf">
+    	        <xsl:value-of select="concat(substring-after(./@rdf:about,'#'),'&#xA;(Closed Enum)')"/>
+    	      </xsl:when>
+    	      <xsl:otherwise>
+    	        <xsl:value-of select="substring-after(./@rdf:about,'#')"/>
+    	      </xsl:otherwise>  
+      	    </xsl:choose>
+      	  </xsl:otherwise>  
+        </xsl:choose>
+      </xsl:variable>   
         
-      </xsl:if> 
-      
+      <!-- add the class to the graph -->
+      <xsl:call-template name="entityImage">
+        <xsl:with-param name="eName" select="$eName"/>
+        <xsl:with-param name="eLabel" select="$eLabel"/>
+        <xsl:with-param name="type" select="'class'"/>
+      </xsl:call-template>     
+ 
     </xsl:for-each>   
     
     <!-- finish the graph definition -->
